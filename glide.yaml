@@ -1,0 +1,22 @@
+package: github.com/viglesiasce/gke-info
+import:
+- package: golang.org/x/net
+  subpackages:
+  - http2
+- package: github.com/go-kit/kit
+  version: ~0.4.0
+  subpackages:
+  - endpoint
+  - transport/http
+- package: cloud.google.com/go
+  version: 26cb9947316ae45307e333fdd0c6e8f192274096
+  subpackages:
+  - monitoring/apiv3
+- package: golang.org/x/sync
+  subpackages:
+  - semaphore
+- package: golang.org/x/time
+  subpackages:
+  - rate
+- package: k8s.io/client-go
+  version: v3.0.0-beta.0
