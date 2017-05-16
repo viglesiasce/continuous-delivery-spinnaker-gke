@@ -11,10 +11,15 @@ RUN set -x \
   && tar zxfv google-cloud-sdk-${GOOGLE_CLOUD_SDK_VERSION}-linux-x86_64.tar.gz \
   && ./google-cloud-sdk/install.sh \
   && gcloud components install kubectl
+RUN wget -q https://github.com/Masterminds/glide/releases/download/v0.12.3/glide-v0.12.3-linux-amd64.tar.gz \
+    && tar zxfv glide-v0.12.3-linux-amd64.tar.gz \
+    && mv linux-amd64/glide /usr/local/bin
+RUN wget -q -O go-cloud-debug https://storage.googleapis.com/cloud-debugger/compute-go/go-cloud-debug \
+    && chmod 0755 go-cloud-debug \
+    && mv go-cloud-debug /usr/local/bin
 COPY . $SOURCE
+RUN cd $SOURCE && glide install
 WORKDIR $SOURCE/cmd/gke-info
 RUN go build -o gke-info
-RUN wget -q -O go-cloud-debug https://storage.googleapis.com/cloud-debugger/compute-go/go-cloud-debug && \
-    chmod 0755 go-cloud-debug
 RUN gcloud debug source gen-repo-info-file
-CMD ["./go-cloud-debug", "-v", "-sourcecontext=source-context.json", "-appmodule=gke-info", "-appversion=v6.1.5", "--", "./gke-info"]
+ENTRYPOINT $SOURCE/run-app.sh

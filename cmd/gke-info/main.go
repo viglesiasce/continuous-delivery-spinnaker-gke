@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	version = "v6.1.5"
+	version = os.Getenv("VERSION")
 )
 
 func main() {
