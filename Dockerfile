@@ -22,4 +22,4 @@ RUN cd $SOURCE && glide install
 WORKDIR $SOURCE/cmd/gke-info
 RUN go build -o gke-info
 RUN gcloud debug source gen-repo-info-file
-ENTRYPOINT $SOURCE/run-app.sh
+CMD ["bash", "-c", "$SOURCE/run-app.sh"]
