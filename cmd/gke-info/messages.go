@@ -11,3 +11,7 @@ type metadataResponse struct {
 type healthResponse struct {
 	Status int `json:"status"`
 }
+
+type homeResponse struct {
+	Document string `json:"document"`
+}

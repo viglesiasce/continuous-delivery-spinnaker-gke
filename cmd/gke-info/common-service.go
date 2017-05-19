@@ -12,6 +12,7 @@ type CommonService interface {
 	Version() string
 	Error() error
 	Health() int
+	Home() string
 }
 
 type commonService struct{}
@@ -32,6 +33,10 @@ func (commonService) Error() error {
 	message := "Unable to perform your request because of reasons"
 	panic(message)
 	return fmt.Errorf(message)
+}
+
+func (commonService) Home() string {
+	return html
 }
 
 type Instance struct {

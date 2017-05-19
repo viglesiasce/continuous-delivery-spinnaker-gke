@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/go-kit/kit/endpoint"
@@ -32,10 +33,21 @@ func makeErrorEndpoint(svc CommonService) endpoint.Endpoint {
 	}
 }
 
+func makeHomeEndpoint(svc CommonService) endpoint.Endpoint {
+	return func(ctx context.Context, request interface{}) (interface{}, error) {
+		return svc.Home(), nil
+	}
+}
+
 func decodeNoParamsRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	return nil, nil
 }
 
-func encodeResponse(_ context.Context, w http.ResponseWriter, response interface{}) error {
+func encodeResponseJSON(_ context.Context, w http.ResponseWriter, response interface{}) error {
 	return json.NewEncoder(w).Encode(response)
+}
+
+func encodeResponseRaw(_ context.Context, w http.ResponseWriter, response interface{}) error {
+	fmt.Fprintf(w, "%s", response)
+	return nil
 }

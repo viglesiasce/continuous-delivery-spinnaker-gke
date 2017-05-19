@@ -15,14 +15,20 @@ var (
 )
 
 func createFrontendEndpoints(common CommonService, sdc *stackDriverClient) {
-
+	homeHandler := httptransport.NewServer(
+		makeHomeEndpoint(common),
+		decodeNoParamsRequest,
+		encodeResponseRaw,
+	)
+	http.Handle("/", sdc.traceClient.HTTPHandler(homeHandler))
+	http.Handle("/home", sdc.traceClient.HTTPHandler(homeHandler))
 }
 
 func createBackendEndpoints(common CommonService, sdc *stackDriverClient) {
 	metaDataHandler := httptransport.NewServer(
 		makeMetaDataEndpoint(common),
 		decodeNoParamsRequest,
-		encodeResponse,
+		encodeResponseJSON,
 	)
 	http.Handle("/metadata", sdc.traceClient.HTTPHandler(metaDataHandler))
 }
@@ -31,21 +37,21 @@ func createCommonEndpoints(common CommonService, sdc *stackDriverClient) {
 	versionHandler := httptransport.NewServer(
 		makeVersionEndpoint(common),
 		decodeNoParamsRequest,
-		encodeResponse,
+		encodeResponseJSON,
 	)
 	http.Handle("/version", sdc.traceClient.HTTPHandler(versionHandler))
 
 	healthHandler := httptransport.NewServer(
 		makeHealthEndpoint(common),
 		decodeNoParamsRequest,
-		encodeResponse,
+		encodeResponseJSON,
 	)
 	http.Handle("/health", sdc.traceClient.HTTPHandler(healthHandler))
 
 	errorHandler := httptransport.NewServer(
 		makeErrorEndpoint(common),
 		decodeNoParamsRequest,
-		encodeResponse,
+		encodeResponseJSON,
 	)
 	http.Handle("/error", sdc.traceClient.HTTPHandler(errorHandler))
 }
@@ -56,7 +62,7 @@ func main() {
 	ctx := context.Background()
 	projectID := "vic-goog"
 	serviceName := "gke-info"
-	serviceComponent := "backend"
+	serviceComponent := os.Getenv("COMPONENT")
 	sdc, err := NewStackDriverClient(ctx, projectID, serviceName+"-"+serviceComponent, version)
 	if err != nil {
 		panic("Unable to create stackdriver clients: " + err.Error())

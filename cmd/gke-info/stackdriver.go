@@ -163,3 +163,13 @@ func (mw stackDriverMiddleware) Error() (err error) {
 	err = mw.next.Error()
 	return
 }
+
+func (mw stackDriverMiddleware) Home() (doc string) {
+	// Catch any panics and report them to Error Reporting service
+	endpoint := "home"
+	defer mw.sdc.errorsClient.Catch(mw.context)
+	defer writeMetric(endpoint, time.Now(), mw)
+	defer logRequest(endpoint, time.Now(), mw)
+	doc = mw.next.Home()
+	return
+}
