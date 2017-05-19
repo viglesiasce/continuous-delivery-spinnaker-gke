@@ -14,11 +14,11 @@ var (
 	version = os.Getenv("VERSION")
 )
 
-func createFrontendEndpoints(common CommonService, sdc stackDriverClient) {
+func createFrontendEndpoints(common CommonService, sdc *stackDriverClient) {
 
 }
 
-func createBackendEndpoints(common CommonService, sdc stackDriverClient) {
+func createBackendEndpoints(common CommonService, sdc *stackDriverClient) {
 	metaDataHandler := httptransport.NewServer(
 		makeMetaDataEndpoint(common),
 		decodeNoParamsRequest,
@@ -27,7 +27,7 @@ func createBackendEndpoints(common CommonService, sdc stackDriverClient) {
 	http.Handle("/metadata", sdc.traceClient.HTTPHandler(metaDataHandler))
 }
 
-func createCommonEndpoints(common CommonService, sdc stackDriverClient) {
+func createCommonEndpoints(common CommonService, sdc *stackDriverClient) {
 	versionHandler := httptransport.NewServer(
 		makeVersionEndpoint(common),
 		decodeNoParamsRequest,
@@ -57,7 +57,7 @@ func main() {
 	projectID := "vic-goog"
 	serviceName := "gke-info"
 	serviceComponent := os.Getenv("COMPONENT")
-	sdc, err := NewStackDriverClient(ctx, projectID, serviceName+'-'+serviceComponent, version)
+	sdc, err := NewStackDriverClient(ctx, projectID, serviceName+"-"+serviceComponent, version)
 	if err != nil {
 		panic("Unable to create stackdriver clients: " + err.Error())
 	}
@@ -66,11 +66,11 @@ func main() {
 	common = commonService{}
 	common = stackDriverMiddleware{ctx, sdc, localLogger, common.(commonService)}
 
-	createCommonEndpoints(common)
+	createCommonEndpoints(common, sdc)
 	if serviceComponent == "frontend" {
-		createFrontendndpoints(common)
+		createFrontendEndpoints(common, sdc)
 	} else if serviceComponent == "backend" {
-		createBackendEndpoints(common)
+		createBackendEndpoints(common, sdc)
 	} else {
 		panic("Unknown component: " + serviceComponent)
 	}
