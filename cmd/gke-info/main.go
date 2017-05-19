@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	version = os.Getenv("VERSION")
+	version = "v7.0.0"
 )
 
 func createFrontendEndpoints(common CommonService, sdc *stackDriverClient) {
@@ -56,7 +56,7 @@ func main() {
 	ctx := context.Background()
 	projectID := "vic-goog"
 	serviceName := "gke-info"
-	serviceComponent := os.Getenv("COMPONENT")
+	serviceComponent := "backend"
 	sdc, err := NewStackDriverClient(ctx, projectID, serviceName+"-"+serviceComponent, version)
 	if err != nil {
 		panic("Unable to create stackdriver clients: " + err.Error())
