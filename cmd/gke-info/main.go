@@ -14,13 +14,50 @@ var (
 	version = os.Getenv("VERSION")
 )
 
+func createFrontendEndpoints(common CommonService, sdc stackDriverClient) {
+
+}
+
+func createBackendEndpoints(common CommonService, sdc stackDriverClient) {
+	metaDataHandler := httptransport.NewServer(
+		makeMetaDataEndpoint(common),
+		decodeNoParamsRequest,
+		encodeResponse,
+	)
+	http.Handle("/metadata", sdc.traceClient.HTTPHandler(metaDataHandler))
+}
+
+func createCommonEndpoints(common CommonService, sdc stackDriverClient) {
+	versionHandler := httptransport.NewServer(
+		makeVersionEndpoint(common),
+		decodeNoParamsRequest,
+		encodeResponse,
+	)
+	http.Handle("/version", sdc.traceClient.HTTPHandler(versionHandler))
+
+	healthHandler := httptransport.NewServer(
+		makeHealthEndpoint(common),
+		decodeNoParamsRequest,
+		encodeResponse,
+	)
+	http.Handle("/health", sdc.traceClient.HTTPHandler(healthHandler))
+
+	errorHandler := httptransport.NewServer(
+		makeErrorEndpoint(common),
+		decodeNoParamsRequest,
+		encodeResponse,
+	)
+	http.Handle("/error", sdc.traceClient.HTTPHandler(errorHandler))
+}
+
 func main() {
 	// Create Local logger
 	localLogger := log.NewLogfmtLogger(os.Stderr)
 	ctx := context.Background()
 	projectID := "vic-goog"
 	serviceName := "gke-info"
-	sdc, err := NewStackDriverClient(ctx, projectID, serviceName, version)
+	serviceComponent := os.Getenv("COMPONENT")
+	sdc, err := NewStackDriverClient(ctx, projectID, serviceName+'-'+serviceComponent, version)
 	if err != nil {
 		panic("Unable to create stackdriver clients: " + err.Error())
 	}
@@ -28,34 +65,16 @@ func main() {
 	var common CommonService
 	common = commonService{}
 	common = stackDriverMiddleware{ctx, sdc, localLogger, common.(commonService)}
-	metaDataHandler := httptransport.NewServer(
-		makeMetaDataEndpoint(common),
-		decodeNoParamsRequest,
-		encodeResponse,
-	)
 
-	versionHandler := httptransport.NewServer(
-		makeVersionEndpoint(common),
-		decodeNoParamsRequest,
-		encodeResponse,
-	)
+	createCommonEndpoints(common)
+	if serviceComponent == "frontend" {
+		createFrontendndpoints(common)
+	} else if serviceComponent == "backend" {
+		createBackendEndpoints(common)
+	} else {
+		panic("Unknown component: " + serviceComponent)
+	}
 
-	healthHandler := httptransport.NewServer(
-		makeHealthEndpoint(common),
-		decodeNoParamsRequest,
-		encodeResponse,
-	)
-
-	errorHandler := httptransport.NewServer(
-		makeErrorEndpoint(common),
-		decodeNoParamsRequest,
-		encodeResponse,
-	)
-
-	http.Handle("/metadata", sdc.traceClient.HTTPHandler(metaDataHandler))
-	http.Handle("/version", sdc.traceClient.HTTPHandler(versionHandler))
-	http.Handle("/health", sdc.traceClient.HTTPHandler(healthHandler))
-	http.Handle("/error", sdc.traceClient.HTTPHandler(errorHandler))
 	localLogger.Log("msg", "HTTP", "addr", ":8080")
 	localLogger.Log("err", http.ListenAndServe(":8080", nil))
 }
