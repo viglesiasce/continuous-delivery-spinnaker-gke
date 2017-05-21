@@ -4,57 +4,14 @@ import (
 	"net/http"
 	"os"
 
-	"golang.org/x/net/context"
+	"context"
 
 	"github.com/go-kit/kit/log"
-	httptransport "github.com/go-kit/kit/transport/http"
 )
 
 var (
-	version = "v7.0.0"
+	version = os.Getenv("VERSION")
 )
-
-func createFrontendEndpoints(common CommonService, sdc *stackDriverClient) {
-	homeHandler := httptransport.NewServer(
-		makeHomeEndpoint(common),
-		decodeNoParamsRequest,
-		encodeResponseRaw,
-	)
-	http.Handle("/", sdc.traceClient.HTTPHandler(homeHandler))
-	http.Handle("/home", sdc.traceClient.HTTPHandler(homeHandler))
-}
-
-func createBackendEndpoints(common CommonService, sdc *stackDriverClient) {
-	metaDataHandler := httptransport.NewServer(
-		makeMetaDataEndpoint(common),
-		decodeNoParamsRequest,
-		encodeResponseJSON,
-	)
-	http.Handle("/metadata", sdc.traceClient.HTTPHandler(metaDataHandler))
-}
-
-func createCommonEndpoints(common CommonService, sdc *stackDriverClient) {
-	versionHandler := httptransport.NewServer(
-		makeVersionEndpoint(common),
-		decodeNoParamsRequest,
-		encodeResponseJSON,
-	)
-	http.Handle("/version", sdc.traceClient.HTTPHandler(versionHandler))
-
-	healthHandler := httptransport.NewServer(
-		makeHealthEndpoint(common),
-		decodeNoParamsRequest,
-		encodeResponseJSON,
-	)
-	http.Handle("/health", sdc.traceClient.HTTPHandler(healthHandler))
-
-	errorHandler := httptransport.NewServer(
-		makeErrorEndpoint(common),
-		decodeNoParamsRequest,
-		encodeResponseJSON,
-	)
-	http.Handle("/error", sdc.traceClient.HTTPHandler(errorHandler))
-}
 
 func main() {
 	// Create Local logger
@@ -69,7 +26,7 @@ func main() {
 	}
 
 	var common CommonService
-	common = commonService{}
+	common = commonService{backendURL: "http://info-backend:8080/metadata", sdc: sdc}
 	common = stackDriverMiddleware{ctx, sdc, localLogger, common.(commonService)}
 
 	createCommonEndpoints(common, sdc)

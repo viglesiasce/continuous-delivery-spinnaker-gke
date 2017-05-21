@@ -7,9 +7,13 @@ import (
 	"github.com/go-kit/kit/log"
 	"github.com/viglesiasce/gke-info/pkg/stackdriver"
 
-	"golang.org/x/net/context"
+	"context"
+
 	"golang.org/x/oauth2/google"
 	monitoring "google.golang.org/api/monitoring/v3"
+
+	"net/http"
+	"net/http/httputil"
 
 	"cloud.google.com/go/errors"
 	"cloud.google.com/go/logging"
@@ -109,21 +113,14 @@ type stackDriverMiddleware struct {
 	next    commonService
 }
 
-func (mw stackDriverMiddleware) Version() (version string) {
-	// Catch any panics and report them to Error Reporting service
-	endpoint := "version"
-	defer mw.sdc.errorsClient.Catch(mw.context)
-	defer writeMetric(endpoint, time.Now(), mw)
-	defer logRequest(endpoint, time.Now(), mw)
-	version = mw.next.Version()
-	return
-}
-
-func logRequest(method string, begin time.Time, mw stackDriverMiddleware) {
+func logRequest(method string, r *http.Request, begin time.Time, mw stackDriverMiddleware) {
 	elapsed := time.Since(begin)
+	// Log request
+	raw, _ := httputil.DumpRequest(r, true)
 	_ = mw.logger.Log(
 		"method", method,
 		"took", elapsed,
+		"request", raw,
 	)
 }
 
@@ -134,42 +131,52 @@ func writeMetric(endpoint string, begin time.Time, mw stackDriverMiddleware) {
 	}
 }
 
-func (mw stackDriverMiddleware) MetaData() (instance *Instance) {
+func (mw stackDriverMiddleware) Version(r *http.Request) (version string) {
+	// Catch any panics and report them to Error Reporting service
+	endpoint := "version"
+	defer mw.sdc.errorsClient.Catch(mw.context)
+	defer writeMetric(endpoint, time.Now(), mw)
+	defer logRequest(endpoint, r, time.Now(), mw)
+	version = mw.next.Version(r)
+	return
+}
+
+func (mw stackDriverMiddleware) MetaData(r *http.Request) (instance *Instance) {
 	// Catch any panics and report them to Error Reporting service
 	endpoint := "metadata"
 	defer mw.sdc.errorsClient.Catch(mw.context)
 	defer writeMetric(endpoint, time.Now(), mw)
-	defer logRequest(endpoint, time.Now(), mw)
-	instance = mw.next.MetaData()
+	defer logRequest(endpoint, r, time.Now(), mw)
+	instance = mw.next.MetaData(r)
 	return
 }
 
-func (mw stackDriverMiddleware) Health() (status int) {
+func (mw stackDriverMiddleware) Health(r *http.Request) (status int) {
 	// Catch any panics and report them to Error Reporting service
 	endpoint := "health"
 	defer mw.sdc.errorsClient.Catch(mw.context)
 	defer writeMetric(endpoint, time.Now(), mw)
-	defer logRequest(endpoint, time.Now(), mw)
-	status = mw.next.Health()
+	defer logRequest(endpoint, r, time.Now(), mw)
+	status = mw.next.Health(r)
 	return
 }
 
-func (mw stackDriverMiddleware) Error() (err error) {
+func (mw stackDriverMiddleware) Error(r *http.Request) (err error) {
 	// Catch any panics and report them to Error Reporting service
 	endpoint := "error"
 	defer mw.sdc.errorsClient.Catch(mw.context)
 	defer writeMetric(endpoint, time.Now(), mw)
-	defer logRequest(endpoint, time.Now(), mw)
-	err = mw.next.Error()
+	defer logRequest(endpoint, r, time.Now(), mw)
+	err = mw.next.Error(r)
 	return
 }
 
-func (mw stackDriverMiddleware) Home() (doc string) {
+func (mw stackDriverMiddleware) Home(r *http.Request) (doc string) {
 	// Catch any panics and report them to Error Reporting service
 	endpoint := "home"
 	defer mw.sdc.errorsClient.Catch(mw.context)
 	defer writeMetric(endpoint, time.Now(), mw)
-	defer logRequest(endpoint, time.Now(), mw)
-	doc = mw.next.Home()
+	defer logRequest(endpoint, r, time.Now(), mw)
+	doc = mw.next.Home(r)
 	return
 }

@@ -42,20 +42,16 @@ const (
 <table class="bordered">
   <tbody>
 	<tr>
-	  <td>Name</td>
+	  <td>Pod Name</td>
+	  <td>{{.PodName}}</td>
+	</tr>
+	<tr>
+	  <td>Node Name</td>
 	  <td>{{.Name}}</td>
 	</tr>
 	<tr>
 	  <td>Version</td>
 	  <td>{{.Version}}</td>
-	</tr>
-	<tr>
-	  <td>ID</td>
-	  <td>{{.Id}}</td>
-	</tr>
-	<tr>
-	  <td>Hostname</td>
-	  <td>{{.Hostname}}</td>
 	</tr>
 	<tr>
 	  <td>Zone</td>
@@ -66,11 +62,11 @@ const (
 	  <td>{{.Project}}</td>
 	</tr>
 	<tr>
-	  <td>Internal IP</td>
+	  <td>Node Internal IP</td>
 	  <td>{{.InternalIP}}</td>
 	</tr>
 	<tr>
-	  <td>External IP</td>
+	  <td>Node External IP</td>
 	  <td>{{.ExternalIP}}</td>
 	</tr>
   </tbody>
@@ -80,7 +76,7 @@ const (
 
 <div class="card orange">
 <div class="card-content white-text">
-<div class="card-title">Proxy that handled this request</div>
+<div class="card-title">Frontend that handled this request</div>
 </div>
 <div class="card-content white">
 <table class="bordered">
@@ -91,7 +87,7 @@ const (
 	</tr>
 	<tr>
 	  <td>Request</td>
-	  <td>{{.LBRequest}}</td>
+	  <td><pre>{{.LBRequest}}</pre></td>
 	</tr>
 <tr>
   <td>Error</td>
