@@ -56,7 +56,7 @@ func newTraceClient(ctx context.Context, projectID string) (*trace.Client, error
 	if err != nil {
 		panic(fmt.Sprintf("Failed to create trace client: %v", err))
 	}
-	policy, err := trace.NewLimitedSampler(1.0, 100)
+	policy, err := trace.NewLimitedSampler(1.0, 5)
 	if err != nil {
 		panic("Failed to create sampler: " + err.Error())
 	}
