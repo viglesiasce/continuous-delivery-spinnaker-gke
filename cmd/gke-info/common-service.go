@@ -38,6 +38,7 @@ func (cs commonService) MetaData(r *http.Request) *Instance {
 	instance.LBRequest = string(raw)
 	instance.ClientIP = r.RemoteAddr
 	instance.Version = version
+	instance.Color = "blue"
 	instance.PodName = os.Getenv("HOSTNAME")
 	return instance
 }
@@ -75,6 +76,7 @@ func (cs commonService) Home(r *http.Request) string {
 
 type Instance struct {
 	Name       string
+	Color      string
 	Version    string
 	Zone       string
 	Project    string
