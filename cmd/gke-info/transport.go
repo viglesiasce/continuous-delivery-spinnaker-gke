@@ -66,7 +66,6 @@ func createFrontendEndpoints(common CommonService, sdc *stackDriverClient) {
 		encodeResponseRaw,
 	)
 	http.Handle("/", sdc.traceClient.HTTPHandler(homeHandler))
-	http.Handle("/home", sdc.traceClient.HTTPHandler(homeHandler))
 }
 
 func createBackendEndpoints(common CommonService, sdc *stackDriverClient) {
