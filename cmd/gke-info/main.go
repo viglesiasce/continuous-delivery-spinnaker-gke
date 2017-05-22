@@ -20,13 +20,14 @@ func main() {
 	projectID := "vic-goog"
 	serviceName := "gke-info"
 	serviceComponent := os.Getenv("COMPONENT")
+	backendURL := os.Getenv("BACKEND_URL")
 	sdc, err := NewStackDriverClient(ctx, projectID, serviceName+"-"+serviceComponent, version)
 	if err != nil {
 		panic("Unable to create stackdriver clients: " + err.Error())
 	}
 
 	var common CommonService
-	common = commonService{backendURL: "http://info-backend:8080/metadata", sdc: sdc}
+	common = commonService{backendURL: backendURL, sdc: sdc}
 	common = stackDriverMiddleware{ctx, sdc, localLogger, common.(commonService)}
 
 	createCommonEndpoints(common, sdc)
