@@ -151,7 +151,7 @@ func (mw stackDriverMiddleware) MetaData(r *http.Request) (instance *Instance) {
 	return
 }
 
-func (mw stackDriverMiddleware) Health(r *http.Request) (status int) {
+func (mw stackDriverMiddleware) Health(r *http.Request) (status string) {
 	// Catch any panics and report them to Error Reporting service
 	endpoint := "health"
 	defer mw.sdc.errorsClient.Catch(mw.context)

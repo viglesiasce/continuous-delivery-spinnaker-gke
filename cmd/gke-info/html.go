@@ -82,11 +82,11 @@ const (
 <table class="bordered">
   <tbody>
 	<tr>
-	  <td>Address</td>
+	  <td>Frontend IP:PORT</td>
 	  <td>{{.ClientIP}}</td>
 	</tr>
 	<tr>
-	  <td>Request</td>
+	  <td>Request to Backend</td>
 	  <td><pre>{{.LBRequest}}</pre></td>
 	</tr>
 <tr>

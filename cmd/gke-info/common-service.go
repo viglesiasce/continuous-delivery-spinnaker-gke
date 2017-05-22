@@ -19,7 +19,7 @@ type CommonService interface {
 	MetaData(r *http.Request) *Instance
 	Version(r *http.Request) string
 	Error(r *http.Request) error
-	Health(r *http.Request) int
+	Health(r *http.Request) string
 	Home(r *http.Request) string
 }
 
@@ -38,17 +38,17 @@ func (cs commonService) MetaData(r *http.Request) *Instance {
 	instance.LBRequest = string(raw)
 	instance.ClientIP = r.RemoteAddr
 	instance.Version = version
-	instance.Color = "blue"
+	instance.Color = "orange"
 	instance.PodName = os.Getenv("HOSTNAME")
 	return instance
 }
 
-func (cs commonService) Health(r *http.Request) int {
-	return http.StatusOK
+func (cs commonService) Health(r *http.Request) string {
+	return "ok"
 }
 
 func (cs commonService) Error(r *http.Request) error {
-	message := "Unable to perform your request because of reasons"
+	message := "Unable to perform your request: " + r.URL.Query().Get("message")
 	panic(message)
 	return fmt.Errorf(message)
 }
@@ -124,6 +124,7 @@ func newInstance(ctx context.Context, cs commonService) *Instance {
 		return i
 	}
 
+	i.Error = "None"
 	i.Zone = getMetaData(ctx, cs, "instance/zone")
 	i.Name = getMetaData(ctx, cs, "instance/name")
 	i.Project = getMetaData(ctx, cs, "project/project-id")

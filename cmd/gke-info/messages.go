@@ -15,3 +15,7 @@ type healthResponse struct {
 type homeResponse struct {
 	Document string `json:"document"`
 }
+
+type errorRequest struct {
+	Message string `json:"message"`
+}
