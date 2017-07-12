@@ -1,0 +1,568 @@
+{
+  "appConfig": {},
+  "name": "Deploy",
+  "application": "sample",
+  "executionEngine": "v2",
+  "keepWaitingPipelines": true,
+  "lastModifiedBy": "anonymous",
+  "limitConcurrent": true,
+  "parallel": true,
+  "parameterConfig": [],
+  "stages": [
+    {
+      "clusters": [
+        {
+          "account": "local",
+          "application": "sample",
+          "cloudProvider": "kubernetes",
+          "containers": [
+            {
+              "args": [],
+              "command": [],
+              "envVars": [
+                {
+                  "name": "COMPONENT",
+                  "value": "frontend"
+                },
+                {
+                  "name": "VERSION",
+                  "value": "${trigger['tag']}"
+                },
+                {
+                  "name": "BACKEND_URL",
+                  "value": "http://sample-backend-canary:8080/metadata"
+                }
+              ],
+              "imageDescription": {
+                "account": "gcr",
+                "fromTrigger": true,
+                "imageId": "gcr.io/PROJECT/sample-app:v.*",
+                "registry": "gcr.io",
+                "repository": "PROJECT/sample-app",
+                "tag": "v-.*"
+              },
+              "imagePullPolicy": "ALWAYS",
+              "limits": {
+                "cpu": null,
+                "memory": null
+              },
+              "livenessProbe": null,
+              "name": "PROJECT-sample-app",
+              "ports": [
+                {
+                  "containerPort": 8080,
+                  "hostIp": null,
+                  "hostPort": null,
+                  "name": "http",
+                  "protocol": "TCP"
+                }
+              ],
+              "readinessProbe": null,
+              "requests": {
+                "cpu": null,
+                "memory": null
+              },
+              "volumeMounts": []
+            }
+          ],
+          "deployment": {
+            "deploymentStrategy": {
+              "rollingUpdate": {
+                "maxSurge": "100%",
+                "maxUnavailable": "0%"
+              },
+              "type": "RollingUpdate"
+            },
+            "enabled": true,
+            "minReadySeconds": 0,
+            "paused": false,
+            "progressRollbackSeconds": null,
+            "revisionHistoryLimit": 2,
+            "rollbackRevision": null
+          },
+          "events": [],
+          "freeFormDetails": "canary",
+          "hostNetwork": null,
+          "interestingHealthProviderNames": [
+            "KubernetesContainer",
+            "KubernetesPod"
+          ],
+          "loadBalancers": [
+            "sample-frontend-canary"
+          ],
+          "namespace": "default",
+          "nodeSelector": {},
+          "podAnnotations": {},
+          "provider": "kubernetes",
+          "region": "default",
+          "replicaSetAnnotations": {
+            "deployment.kubernetes.io/desired-replicas": "8",
+            "deployment.kubernetes.io/max-replicas": "16",
+            "deployment.kubernetes.io/revision": "40",
+            "deployment.kubernetes.io/revision-history": "12"
+          },
+          "restartPolicy": null,
+          "securityContext": null,
+          "securityGroups": [],
+          "sequence": null,
+          "stack": "frontend",
+          "strategy": "",
+          "targetSize": 1,
+          "terminationGracePeriodSeconds": 30,
+          "volumeSources": []
+        }
+      ],
+      "name": "Deploy Frontend Canary",
+      "refId": "2",
+      "requisiteStageRefIds": [
+        "9"
+      ],
+      "type": "deploy"
+    },
+    {
+      "clusters": [
+        {
+          "account": "local",
+          "application": "sample",
+          "cloudProvider": "kubernetes",
+          "containers": [
+            {
+              "args": [],
+              "command": [],
+              "envVars": [
+                {
+                  "name": "COMPONENT",
+                  "value": "backend"
+                },
+                {
+                  "name": "VERSION",
+                  "value": "${trigger['tag']}"
+                }
+              ],
+              "imageDescription": {
+                "account": "gcr",
+                "fromTrigger": true,
+                "imageId": "gcr.io/PROJECT/sample-app:v.*",
+                "registry": "gcr.io",
+                "repository": "PROJECT/sample-app",
+                "tag": "v-.*"
+              },
+              "imagePullPolicy": "ALWAYS",
+              "limits": {
+                "cpu": null,
+                "memory": null
+              },
+              "livenessProbe": null,
+              "name": "PROJECT-sample-app",
+              "ports": [
+                {
+                  "containerPort": 8080,
+                  "hostIp": null,
+                  "hostPort": null,
+                  "name": "http",
+                  "protocol": "TCP"
+                }
+              ],
+              "readinessProbe": null,
+              "requests": {
+                "cpu": null,
+                "memory": null
+              },
+              "volumeMounts": []
+            }
+          ],
+          "deployment": {
+            "deploymentStrategy": {
+              "rollingUpdate": {
+                "maxSurge": "100%",
+                "maxUnavailable": "0%"
+              },
+              "type": "RollingUpdate"
+            },
+            "enabled": true,
+            "minReadySeconds": 0,
+            "paused": false,
+            "progressRollbackSeconds": null,
+            "revisionHistoryLimit": 2,
+            "rollbackRevision": null
+          },
+          "events": [],
+          "freeFormDetails": "canary",
+          "hostNetwork": null,
+          "interestingHealthProviderNames": [
+            "KubernetesContainer",
+            "KubernetesPod"
+          ],
+          "loadBalancers": [
+            "sample-backend-canary"
+          ],
+          "namespace": "default",
+          "nodeSelector": {},
+          "podAnnotations": {},
+          "provider": "kubernetes",
+          "region": "default",
+          "replicaSetAnnotations": {
+            "deployment.kubernetes.io/desired-replicas": "4",
+            "deployment.kubernetes.io/max-replicas": "8",
+            "deployment.kubernetes.io/revision": "28"
+          },
+          "restartPolicy": null,
+          "securityContext": null,
+          "securityGroups": [],
+          "sequence": null,
+          "stack": "backend",
+          "strategy": "",
+          "targetSize": 1,
+          "terminationGracePeriodSeconds": 30,
+          "volumeSources": []
+        }
+      ],
+      "name": "Deploy Backend Canary",
+      "refId": "3",
+      "requisiteStageRefIds": [
+        "9"
+      ],
+      "type": "deploy"
+    },
+    {
+      "account": "local",
+      "application": "sample",
+      "cloudProvider": "kubernetes",
+      "cloudProviderType": "kubernetes",
+      "container": {
+        "args": [],
+        "command": [
+          "curl",
+          "http://sample-backend-canary:8080"
+        ],
+        "envVars": [],
+        "imageDescription": {
+          "account": "gcr",
+          "fromTrigger": true,
+          "organization": "PROJECT",
+          "registry": "gcr.io",
+          "repository": "PROJECT/sample-app",
+          "tag": "v-.*"
+        },
+        "name": "1494826281215",
+        "volumeMounts": []
+      },
+      "credentials": "local",
+      "name": "BE Integration Tests",
+      "namespace": "default",
+      "refId": "7",
+      "requisiteStageRefIds": [
+        "3"
+      ],
+      "type": "runJob",
+      "volumeSources": []
+    },
+    {
+      "account": "local",
+      "application": "sample",
+      "cloudProvider": "kubernetes",
+      "cloudProviderType": "kubernetes",
+      "container": {
+        "args": [],
+        "command": [
+          "curl",
+          "http://sample-frontend-canary:80"
+        ],
+        "envVars": [],
+        "imageDescription": {
+          "account": "gcr",
+          "fromTrigger": true,
+          "organization": "PROJECT",
+          "registry": "gcr.io",
+          "repository": "PROJECT/sample-app",
+          "tag": "v-.*"
+        },
+        "name": "1494826281215",
+        "volumeMounts": []
+      },
+      "credentials": "local",
+      "name": "FE Integration Tests",
+      "namespace": "default",
+      "refId": "8",
+      "requisiteStageRefIds": [
+        "2"
+      ],
+      "type": "runJob",
+      "volumeSources": []
+    },
+    {
+      "account": "local",
+      "application": "sample",
+      "cloudProvider": "kubernetes",
+      "cloudProviderType": "kubernetes",
+      "container": {
+        "args": [
+          "version"
+        ],
+        "command": [
+          "go"
+        ],
+        "envVars": [],
+        "imageDescription": {
+          "account": "gcr",
+          "fromTrigger": true,
+          "organization": "PROJECT",
+          "registry": "gcr.io",
+          "repository": "PROJECT/sample-app",
+          "tag": "v-.*"
+        },
+        "name": "1495254072487",
+        "volumeMounts": []
+      },
+      "credentials": "local",
+      "name": "Unit Tests",
+      "namespace": "default",
+      "refId": "9",
+      "requisiteStageRefIds": [],
+      "type": "runJob",
+      "volumeSources": []
+    },
+    {
+      "failPipeline": true,
+      "instructions": "Do you want to deploy this image to production?",
+      "judgmentInputs": [],
+      "name": "Push to Production?",
+      "notifications": [],
+      "refId": "11",
+      "requisiteStageRefIds": [
+        "7",
+        "8"
+      ],
+      "type": "manualJudgment"
+    },
+    {
+      "clusters": [
+        {
+          "account": "local",
+          "application": "sample",
+          "cloudProvider": "kubernetes",
+          "containers": [
+            {
+              "args": [],
+              "command": [],
+              "envVars": [
+                {
+                  "envSource": null,
+                  "name": "COMPONENT",
+                  "value": "backend"
+                },
+                {
+                  "envSource": null,
+                  "name": "VERSION",
+                  "value": "${ trigger['tag'] }"
+                }
+              ],
+              "imageDescription": {
+                "account": "gcr",
+                "fromTrigger": true,
+                "imageId": "gcr.io/PROJECT/sample-app:v.*",
+                "registry": "gcr.io",
+                "repository": "PROJECT/sample-app",
+                "tag": "v-.*"
+              },
+              "imagePullPolicy": "ALWAYS",
+              "lifecycle": null,
+              "limits": null,
+              "livenessProbe": null,
+              "name": "PROJECT-sample-app",
+              "ports": [
+                {
+                  "containerPort": 80,
+                  "hostIp": null,
+                  "hostPort": null,
+                  "name": "http",
+                  "protocol": "TCP"
+                }
+              ],
+              "readinessProbe": null,
+              "requests": null,
+              "securityContext": null,
+              "volumeMounts": []
+            }
+          ],
+          "deployment": {
+            "deploymentStrategy": {
+              "rollingUpdate": {
+                "maxSurge": "100%",
+                "maxUnavailable": "0%"
+              },
+              "type": "RollingUpdate"
+            },
+            "enabled": true,
+            "minReadySeconds": 0,
+            "paused": false,
+            "progressRollbackSeconds": null,
+            "revisionHistoryLimit": 2,
+            "rollbackRevision": null
+          },
+          "events": [],
+          "freeFormDetails": null,
+          "hostNetwork": null,
+          "interestingHealthProviderNames": [
+            "KubernetesContainer",
+            "KubernetesPod"
+          ],
+          "loadBalancers": [
+            "sample-backend-prod"
+          ],
+          "namespace": "default",
+          "nodeSelector": {},
+          "podAnnotations": {},
+          "provider": "kubernetes",
+          "region": "default",
+          "replicaSetAnnotations": {
+            "deployment.kubernetes.io/desired-replicas": "4",
+            "deployment.kubernetes.io/max-replicas": "8",
+            "deployment.kubernetes.io/revision": "31"
+          },
+          "restartPolicy": null,
+          "securityContext": null,
+          "securityGroups": [],
+          "sequence": null,
+          "stack": "backend",
+          "strategy": "",
+          "targetSize": 1,
+          "terminationGracePeriodSeconds": 30,
+          "volumeSources": []
+        }
+      ],
+      "name": "Deploy Backend Prod",
+      "refId": "12",
+      "requisiteStageRefIds": [
+        "11"
+      ],
+      "type": "deploy"
+    },
+    {
+      "clusters": [
+        {
+          "account": "local",
+          "application": "sample",
+          "cloudProvider": "kubernetes",
+          "containers": [
+            {
+              "args": [],
+              "command": [],
+              "envVars": [
+                {
+                  "envSource": null,
+                  "name": "COMPONENT",
+                  "value": "frontend"
+                },
+                {
+                  "envSource": null,
+                  "name": "VERSION",
+                  "value": "${ trigger['tag'] }"
+                },
+                {
+                  "name": "BACKEND_URL",
+                  "value": "http://sample-backend-prod:8080/metadata"
+                }
+              ],
+              "imageDescription": {
+                "account": "gcr",
+                "fromTrigger": true,
+                "imageId": "gcr.io/PROJECT/sample-app:v.*",
+                "registry": "gcr.io",
+                "repository": "PROJECT/sample-app",
+                "tag": "v-.*"
+              },
+              "imagePullPolicy": "ALWAYS",
+              "lifecycle": null,
+              "limits": null,
+              "livenessProbe": null,
+              "name": "PROJECT-sample-app",
+              "ports": [
+                {
+                  "containerPort": 80,
+                  "hostIp": null,
+                  "hostPort": null,
+                  "name": "http",
+                  "protocol": "TCP"
+                }
+              ],
+              "readinessProbe": null,
+              "requests": null,
+              "securityContext": null,
+              "volumeMounts": []
+            }
+          ],
+          "deployment": {
+            "deploymentStrategy": {
+              "rollingUpdate": {
+                "maxSurge": "100%",
+                "maxUnavailable": "0%"
+              },
+              "type": "RollingUpdate"
+            },
+            "enabled": true,
+            "minReadySeconds": 0,
+            "paused": false,
+            "progressRollbackSeconds": null,
+            "revisionHistoryLimit": 2,
+            "rollbackRevision": null
+          },
+          "events": [],
+          "freeFormDetails": null,
+          "hostNetwork": null,
+          "interestingHealthProviderNames": [
+            "KubernetesContainer",
+            "KubernetesPod"
+          ],
+          "loadBalancers": [
+            "sample-frontend-prod",
+            "sample-frontend-canary"
+          ],
+          "namespace": "default",
+          "nodeSelector": {},
+          "podAnnotations": {},
+          "provider": "kubernetes",
+          "region": "default",
+          "replicaSetAnnotations": {
+            "deployment.kubernetes.io/desired-replicas": "8",
+            "deployment.kubernetes.io/max-replicas": "16",
+            "deployment.kubernetes.io/revision": "43",
+            "deployment.kubernetes.io/revision-history": "12"
+          },
+          "restartPolicy": null,
+          "securityContext": null,
+          "securityGroups": [],
+          "sequence": null,
+          "stack": "frontend",
+          "strategy": "",
+          "targetSize": 8,
+          "terminationGracePeriodSeconds": 30,
+          "volumeSources": []
+        }
+      ],
+      "name": "Deploy Frontend Prod",
+      "refId": "13",
+      "requisiteStageRefIds": [
+        "11"
+      ],
+      "type": "deploy"
+    }
+  ],
+  "triggers": [
+    {
+      "account": "gcr",
+      "application": "gceme",
+      "enabled": true,
+      "organization": "PROJECT",
+      "pipeline": "61372c70-62af-422f-9565-e1975a758612",
+      "registry": "gcr.io",
+      "repository": "PROJECT/sample-app",
+      "status": [
+        "successful"
+      ],
+      "tag": "v-.*",
+      "type": "docker"
+    }
+  ],
+  "updateTs": "1498196829447"
+}

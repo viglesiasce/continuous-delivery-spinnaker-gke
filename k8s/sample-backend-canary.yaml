@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: sample-backend-canary
+  name: sample-backend-canary
+spec:
+  ports:
+  - name: 8080-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    load-balancer-sample-backend-canary: "true"
+  sessionAffinity: None
+  type: ClusterIP
