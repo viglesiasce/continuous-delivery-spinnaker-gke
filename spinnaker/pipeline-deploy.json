@@ -39,7 +39,7 @@
                 "imageId": "gcr.io/PROJECT/sample-app:v.*",
                 "registry": "gcr.io",
                 "repository": "PROJECT/sample-app",
-                "tag": "v-.*"
+                "tag": "v.*"
               },
               "imagePullPolicy": "ALWAYS",
               "limits": {
@@ -145,7 +145,7 @@
                 "imageId": "gcr.io/PROJECT/sample-app:v.*",
                 "registry": "gcr.io",
                 "repository": "PROJECT/sample-app",
-                "tag": "v-.*"
+                "tag": "v.*"
               },
               "imagePullPolicy": "ALWAYS",
               "limits": {
@@ -242,7 +242,7 @@
           "organization": "PROJECT",
           "registry": "gcr.io",
           "repository": "PROJECT/sample-app",
-          "tag": "v-.*"
+          "tag": "v.*"
         },
         "name": "1494826281215",
         "volumeMounts": []
@@ -275,7 +275,7 @@
           "organization": "PROJECT",
           "registry": "gcr.io",
           "repository": "PROJECT/sample-app",
-          "tag": "v-.*"
+          "tag": "v.*"
         },
         "name": "1494826281215",
         "volumeMounts": []
@@ -309,7 +309,7 @@
           "organization": "PROJECT",
           "registry": "gcr.io",
           "repository": "PROJECT/sample-app",
-          "tag": "v-.*"
+          "tag": "v.*"
         },
         "name": "1495254072487",
         "volumeMounts": []
@@ -363,7 +363,7 @@
                 "imageId": "gcr.io/PROJECT/sample-app:v.*",
                 "registry": "gcr.io",
                 "repository": "PROJECT/sample-app",
-                "tag": "v-.*"
+                "tag": "v.*"
               },
               "imagePullPolicy": "ALWAYS",
               "lifecycle": null,
@@ -470,7 +470,7 @@
                 "imageId": "gcr.io/PROJECT/sample-app:v.*",
                 "registry": "gcr.io",
                 "repository": "PROJECT/sample-app",
-                "tag": "v-.*"
+                "tag": "v.*"
               },
               "imagePullPolicy": "ALWAYS",
               "lifecycle": null,
@@ -560,7 +560,7 @@
       "status": [
         "successful"
       ],
-      "tag": "v-.*",
+      "tag": "v.*",
       "type": "docker"
     }
   ],
