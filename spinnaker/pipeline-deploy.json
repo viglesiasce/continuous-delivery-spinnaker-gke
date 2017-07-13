@@ -88,7 +88,8 @@
             "KubernetesPod"
           ],
           "loadBalancers": [
-            "sample-frontend-canary"
+            "sample-frontend-canary",
+            "sample-frontend-prod"
           ],
           "namespace": "default",
           "nodeSelector": {},
@@ -401,7 +402,7 @@
             "rollbackRevision": null
           },
           "events": [],
-          "freeFormDetails": null,
+          "freeFormDetails": "prod",
           "hostNetwork": null,
           "interestingHealthProviderNames": [
             "KubernetesContainer",
@@ -508,15 +509,14 @@
             "rollbackRevision": null
           },
           "events": [],
-          "freeFormDetails": null,
+          "freeFormDetails": "prod",
           "hostNetwork": null,
           "interestingHealthProviderNames": [
             "KubernetesContainer",
             "KubernetesPod"
           ],
           "loadBalancers": [
-            "sample-frontend-prod",
-            "sample-frontend-canary"
+            "sample-frontend-prod"
           ],
           "namespace": "default",
           "nodeSelector": {},

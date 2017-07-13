@@ -9,9 +9,8 @@ spec:
   - name: 80-80
     port: 80
     protocol: TCP
-    targetPort: 80
+    targetPort: 8080
   selector:
     load-balancer-sample-frontend-prod: "true"
-    load-balancer-sample-frontend-canary: "true"
   sessionAffinity: None
   type: LoadBalancer
