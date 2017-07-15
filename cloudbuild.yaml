@@ -1,0 +1,6 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--tag=gcr.io/$PROJECT_ID/sample-app:$TAG_NAME', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['run', 'gcr.io/$PROJECT_ID/sample-app:$TAG_NAME', 'go', 'test']
+images: ['gcr.io/$PROJECT_ID/sample-app:$TAG_NAME']
