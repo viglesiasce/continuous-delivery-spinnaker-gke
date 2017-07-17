@@ -90,9 +90,9 @@ func newMonitoringService(ctx context.Context, projectID string, metricType stri
 	if err != nil {
 		return nil, fmt.Errorf("failed to create monitoring service: %v", err)
 	}
-	// if err := stackdriver.CreateCustomMetric(monitoringService, projectID, metricType, "s"); err != nil {
-	// 	return nil, fmt.Errorf("failed to create custom metric: %v", err)
-	// }
+	if err := stackdriver.CreateCustomMetric(monitoringService, projectID, metricType, "s"); err != nil {
+		return nil, fmt.Errorf("failed to create custom metric: %v", err)
+	}
 	for {
 		resp, err := stackdriver.GetCustomMetric(monitoringService, projectID, metricType)
 		if err != nil {
