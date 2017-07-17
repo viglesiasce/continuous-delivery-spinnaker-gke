@@ -1,4 +1,6 @@
 {
+  "name": "Deploy",
+  "application": "sample",
   "appConfig": {},
   "executionEngine": "v2",
   "keepWaitingPipelines": true,
