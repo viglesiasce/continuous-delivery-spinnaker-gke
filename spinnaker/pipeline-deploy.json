@@ -1,7 +1,5 @@
 {
   "appConfig": {},
-  "name": "Deploy",
-  "application": "sample",
   "executionEngine": "v2",
   "keepWaitingPipelines": true,
   "lastModifiedBy": "anonymous",
@@ -115,9 +113,7 @@
       ],
       "name": "Deploy Frontend Canary",
       "refId": "2",
-      "requisiteStageRefIds": [
-        "9"
-      ],
+      "requisiteStageRefIds": [],
       "type": "deploy"
     },
     {
@@ -220,9 +216,7 @@
       ],
       "name": "Deploy Backend Canary",
       "refId": "3",
-      "requisiteStageRefIds": [
-        "9"
-      ],
+      "requisiteStageRefIds": [],
       "type": "deploy"
     },
     {
@@ -260,6 +254,7 @@
     },
     {
       "account": "local",
+      "annotations": {},
       "application": "sample",
       "cloudProvider": "kubernetes",
       "cloudProviderType": "kubernetes",
@@ -282,44 +277,13 @@
         "volumeMounts": []
       },
       "credentials": "local",
+      "labels": {},
       "name": "FE Integration Tests",
       "namespace": "default",
       "refId": "8",
       "requisiteStageRefIds": [
         "2"
       ],
-      "type": "runJob",
-      "volumeSources": []
-    },
-    {
-      "account": "local",
-      "application": "sample",
-      "cloudProvider": "kubernetes",
-      "cloudProviderType": "kubernetes",
-      "container": {
-        "args": [
-          "version"
-        ],
-        "command": [
-          "go"
-        ],
-        "envVars": [],
-        "imageDescription": {
-          "account": "gcr",
-          "fromTrigger": true,
-          "organization": "PROJECT",
-          "registry": "gcr.io",
-          "repository": "PROJECT/sample-app",
-          "tag": "v.*"
-        },
-        "name": "1495254072487",
-        "volumeMounts": []
-      },
-      "credentials": "local",
-      "name": "Unit Tests",
-      "namespace": "default",
-      "refId": "9",
-      "requisiteStageRefIds": [],
       "type": "runJob",
       "volumeSources": []
     },
@@ -564,5 +528,5 @@
       "type": "docker"
     }
   ],
-  "updateTs": "1498196829447"
+  "updateTs": "1500322920670"
 }
