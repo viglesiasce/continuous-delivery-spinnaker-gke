@@ -19,7 +19,10 @@ func main() {
 	// Create Local logger
 	localLogger := log.NewLogfmtLogger(os.Stderr)
 	ctx := context.Background()
-	projectID := metadata.ProjectID
+	projectID, err := metadata.ProjectID()
+	if err != nil {
+		panic("Unable get Project ID from metadata: " + err.Error())
+	}
 	serviceName := "gke-info"
 	serviceComponent := os.Getenv("COMPONENT")
 	backendURL := os.Getenv("BACKEND_URL")
