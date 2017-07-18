@@ -6,6 +6,7 @@ import (
 
 	"context"
 
+	"cloud.google.com/go/compute/metadata"
 	"github.com/go-kit/kit/log"
 )
 
@@ -17,7 +18,7 @@ func main() {
 	// Create Local logger
 	localLogger := log.NewLogfmtLogger(os.Stderr)
 	ctx := context.Background()
-	projectID := "vic-goog"
+	projectID := metadata.ProjectID
 	serviceName := "gke-info"
 	serviceComponent := os.Getenv("COMPONENT")
 	backendURL := os.Getenv("BACKEND_URL")
