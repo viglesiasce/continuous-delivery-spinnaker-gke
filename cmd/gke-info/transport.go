@@ -59,43 +59,43 @@ func encodeResponseRaw(_ context.Context, w http.ResponseWriter, response interf
 	return nil
 }
 
-func createFrontendEndpoints(common CommonService, sdc *stackDriverClient) {
+func createFrontendEndpoints(common CommonService) {
 	homeHandler := httptransport.NewServer(
 		makeHomeEndpoint(common),
 		decodeNoParamsRequest,
 		encodeResponseRaw,
 	)
-	http.Handle("/", sdc.traceClient.HTTPHandler(homeHandler))
+	http.Handle("/", homeHandler)
 }
 
-func createBackendEndpoints(common CommonService, sdc *stackDriverClient) {
+func createBackendEndpoints(common CommonService) {
 	metaDataHandler := httptransport.NewServer(
 		makeMetaDataEndpoint(common),
 		decodeNoParamsRequest,
 		encodeResponseJSON,
 	)
-	http.Handle("/metadata", sdc.traceClient.HTTPHandler(metaDataHandler))
+	http.Handle("/metadata", metaDataHandler)
 }
 
-func createCommonEndpoints(common CommonService, sdc *stackDriverClient) {
+func createCommonEndpoints(common CommonService) {
 	versionHandler := httptransport.NewServer(
 		makeVersionEndpoint(common),
 		decodeNoParamsRequest,
 		encodeResponseJSON,
 	)
-	http.Handle("/version", sdc.traceClient.HTTPHandler(versionHandler))
+	http.Handle("/version", versionHandler)
 
 	healthHandler := httptransport.NewServer(
 		makeHealthEndpoint(common),
 		decodeNoParamsRequest,
 		encodeResponseJSON,
 	)
-	http.Handle("/health", sdc.traceClient.HTTPHandler(healthHandler))
+	http.Handle("/health", healthHandler)
 
 	errorHandler := httptransport.NewServer(
 		makeErrorEndpoint(common),
 		decodeNoParamsRequest,
 		encodeResponseJSON,
 	)
-	http.Handle("/error", sdc.traceClient.HTTPHandler(errorHandler))
+	http.Handle("/error", errorHandler)
 }

@@ -26,20 +26,24 @@ func main() {
 	serviceName := "gke-info"
 	serviceComponent := os.Getenv("COMPONENT")
 	backendURL := os.Getenv("BACKEND_URL")
-	sdc, err := NewStackDriverClient(ctx, projectID, serviceName+"-"+serviceComponent, version)
-	if err != nil {
-		panic("Unable to create stackdriver clients: " + err.Error())
-	}
+	stackdriverEnabled := os.Getenv("STACKDRIVER_ENABLED")
 
 	var common CommonService
-	common = commonService{backendURL: backendURL, sdc: sdc}
-	common = stackDriverMiddleware{ctx, sdc, localLogger, common.(commonService)}
+	common = commonService{backendURL: backendURL}
 
-	createCommonEndpoints(common, sdc)
+	if stackdriverEnabled == "true" {
+		sdc, err := NewStackDriverClient(ctx, projectID, serviceName+"-"+serviceComponent, version)
+		if err != nil {
+			panic("Unable to create stackdriver clients: " + err.Error())
+		}
+		common = stackDriverMiddleware{ctx, sdc, localLogger, common.(commonService)}
+	}
+
+	createCommonEndpoints(common)
 	if serviceComponent == "frontend" {
-		createFrontendEndpoints(common, sdc)
+		createFrontendEndpoints(common)
 	} else if serviceComponent == "backend" {
-		createBackendEndpoints(common, sdc)
+		createBackendEndpoints(common)
 	} else {
 		panic("Unknown component: " + serviceComponent)
 	}
