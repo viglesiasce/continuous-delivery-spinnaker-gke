@@ -103,8 +103,8 @@ func getMetaData(ctx context.Context, cs commonService, path string) string {
 func makeRequest(r *http.Request, cs commonService) []byte {
 	transport := http.Transport{DisableKeepAlives: true}
 	client := &http.Client{Transport: &transport}
-	traceClient := cs.sdc.traceClient.NewHTTPClient(client)
-	resp, err := traceClient.Do(r)
+	// traceClient := cs.sdc.traceClient.NewHTTPClient(client)
+	resp, err := client.Do(r)
 	if err != nil {
 		message := "Unable to call backend: " + err.Error()
 		panic(message)
