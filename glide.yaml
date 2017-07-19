@@ -8,6 +8,7 @@ import:
   subpackages:
   - endpoint
   - transport/http
+  - log
 - package: cloud.google.com/go
   version: 26cb9947316ae45307e333fdd0c6e8f192274096
   subpackages:

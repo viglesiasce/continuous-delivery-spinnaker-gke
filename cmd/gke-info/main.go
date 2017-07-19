@@ -5,9 +5,6 @@ import (
 	_ "net/http/pprof"
 	"os"
 
-	"context"
-
-	"cloud.google.com/go/compute/metadata"
 	"github.com/go-kit/kit/log"
 )
 
@@ -18,26 +15,11 @@ var (
 func main() {
 	// Create Local logger
 	localLogger := log.NewLogfmtLogger(os.Stderr)
-	ctx := context.Background()
-	projectID, err := metadata.ProjectID()
-	if err != nil {
-		panic("Unable get Project ID from metadata: " + err.Error())
-	}
-	serviceName := "gke-info"
 	serviceComponent := os.Getenv("COMPONENT")
 	backendURL := os.Getenv("BACKEND_URL")
-	stackdriverEnabled := os.Getenv("STACKDRIVER_ENABLED")
 
 	var common CommonService
 	common = commonService{backendURL: backendURL}
-
-	if stackdriverEnabled == "true" {
-		sdc, err := NewStackDriverClient(ctx, projectID, serviceName+"-"+serviceComponent, version)
-		if err != nil {
-			panic("Unable to create stackdriver clients: " + err.Error())
-		}
-		common = stackDriverMiddleware{ctx, sdc, localLogger, common.(commonService)}
-	}
 
 	createCommonEndpoints(common)
 	if serviceComponent == "frontend" {
