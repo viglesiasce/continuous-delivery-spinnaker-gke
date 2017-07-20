@@ -1,0 +1,24 @@
+platform: linux
+inputs:
+- name: gke-info
+outputs:
+- name: email
+image_resource:
+  type: docker-image
+  source:
+    repository: golang
+    tag: "1.8"
+run:
+  path: bash
+  args:
+  - -exc
+  - |
+    cd gke-info
+    echo "Failed to build gke-info" > ../email/subject-failed
+    git --no-pager show > ../email/body-failed
+    echo "Successfully built gke-info" > ../email/subject-passed
+    cd ..
+    cp -a gke-info /go/src/
+    cd /go/src/gke-info
+    go get -v
+    go build

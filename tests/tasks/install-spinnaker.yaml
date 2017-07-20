@@ -1,0 +1,32 @@
+platform: linux
+inputs:
+- name: gke-info
+outputs:
+- name: email
+image_resource:
+    type: docker-image
+    source:
+      repository: google/cloud-sdk
+      tag: latest
+params:
+  service_account_json:
+run:
+  path: bash
+  args:
+  - -exc
+  - |
+    cat > service_account.json <<EOF
+    $service_account_json
+    EOF
+    apt-get install -y git openssl wget
+    gcloud auth activate-service-account --key-file=service_account.json
+
+    cd gke-info
+    # Setup email
+    echo "Spinnaker Tutorial: Failed to run tutorial" > ../email/subject-failed
+    git --no-pager show > ../email/body-failed
+
+    ./tests/scripts/cleanup.sh
+    ./tests/scripts/install-spinnaker.sh
+
+    
