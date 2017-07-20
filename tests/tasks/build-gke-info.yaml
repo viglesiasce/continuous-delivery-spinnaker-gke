@@ -18,7 +18,10 @@ run:
     git --no-pager show > ../email/body-failed
     echo "Successfully built gke-info" > ../email/subject-passed
     cd ..
-    cp -a gke-info /go/src/
-    cd /go/src/gke-info
-    go get -v
+    mkdir -p /go/src/github.com/viglesiasce
+    cp -a gke-info /go/src/github.com/viglesiasce
+    curl https://glide.sh/get | sh
+    cd /go/src/github.com/viglesiasce/gke-info
+    glide install
+    cd cmd/gke-info
     go build
