@@ -17,7 +17,7 @@ cp linux-amd64/helm .
 ./helm init
 # Give tiller a chance to start up
 # TODO: Change this to polling
-sleep 120
+sleep 180
 ./helm version | grep 2.5.0
 
 export PROJECT=$(gcloud info --format='value(config.project)')
