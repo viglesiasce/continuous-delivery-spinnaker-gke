@@ -47,7 +47,7 @@ accounts:
   email: 1234@5678.com
 EOF
 
-./helm install -n cd stable/spinnaker -f spinnaker-config.yaml --timeout 600
+./helm install -n cd stable/spinnaker -f spinnaker-config.yaml --version 0.3.1 --timeout 600
 
 export DECK_POD=$(kubectl get pods --namespace default -l "component=deck" -o jsonpath="{.items[0].metadata.name}")
 kubectl port-forward --namespace default $DECK_POD 8080:9000 &
