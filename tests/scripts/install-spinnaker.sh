@@ -46,6 +46,8 @@ accounts:
   username: _json_key
   password: '$SA_JSON'
   email: 1234@5678.com
+images:
+  deck: quay.io/spinnaker/deck:v2.1095.0
 EOF
 
 ./helm install -n cd stable/spinnaker -f spinnaker-config.yaml --version 0.3.1 --timeout 600
