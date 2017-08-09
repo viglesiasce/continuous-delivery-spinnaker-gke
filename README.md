@@ -7,19 +7,13 @@
 
 # Continuous Delivery with Spinnaker and Kubernetes (in 40 minutes or less)
 
-You've got code. It probably compiles. Now what? 
+To continuously deliver updates to your users, you will need to create an automated process that can reliably build, test and update your software. Changes to your code should be automatically taken through a pipeline that includes artifact creation, unit testing, functional testing and production roll out. In some cases you will want to have code hit a subset of your users so that it is being exercised in a realistic way before being rolled out to your entire fleet of machines. This procedure, canary releases, is facilitated by having the ability to quickly rollback software changes that do not provide the intended results.
 
-It's time to push code into production, cross your fingers, and pray! Right? On second thought, we should probably test the code and ensure it works BEFORE releasing it to the rest of the world. Ideally, we'll do this using open source, multi-cloud tools that will work whether we're using Java or Go, on-premise or in the cloud.
+With Container Engine and Spinnaker we can create a robust continuous delivery flow that ensures we can ship software as quickly as it can be developed. Although our end goal is to be able iterate quickly, we must ensure that each code change passes through a gamut of automated validations and tests before becoming a candidate for production roll out. Once the change has been sufficiently vetted through automation, you may want to do some manual validation or further testing against the software. After it has been deemed “production-ready”, one of your team members can approve it for production deployment. 
 
-And that's where [Kubernetes](https://www.kubernetes.io) and [Spinnaker](https://www.spinnaker.io), the continuous delivery platform come in. 
-In this workshop we'll setup a CICD pipeline and explain the pros and cons, along the way.
+In this tutorial, you will build the following pipeline:
 
-[See a video of the pipleine you'll create here!](https://youtu.be/dpbWpzAs-RwD)
-
-In this solution, you'll will:
-* Setting up an example Continuous Delivery pipeline from scratch.
-* Use your favorite tools (well, my favorite, at least) Kubernetes and Spinnaker
-* Learn and overcome common Pitfalls and Obstacles of the above tools (because nothing's perfect)
+![](../docs/img/PLACEHOLDER.png)
 
 ## Labs
 
