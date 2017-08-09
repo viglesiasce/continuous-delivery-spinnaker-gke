@@ -1,144 +1,76 @@
 # Installing Spinnnaker
+You will use Helm to install Spinnaker from the Charts repository. Helm is a package manager that makes it easy to configure and deploy Kubernetes applications.
 
-Spinnkaer has a lot of pieces and parts.  Below is a table listing everything.  You don't need to know *any* of this for the workshop, but it's here for completeness.
-
-| Servivces | Port | Description |
-| --- | --- | --- |
-| Deck	| 9000 | Deck is a static AngularJS-based UI. |
-| Clouddriver	| 7002 | Cloud Driver integrates with each cloud provider (AWS, GCP, Azure, etc.). It is responsible for all cloud provider-specific read and write operations. |
-| Echo	| 8089 | Echo provides Spinnaker’s notification support, including integrations with Slack, Hipchat, SMS (via Twilio) and Email. |
-| Front50	| 8080 | Front50 stores all application, pipeline and notification metadata. |
-| Gate	| 8084 | Gate exposes APIs for all external consumers of Spinnaker (including deck). It is the front door to Spinnaker. |
-| Igor	| 8088 | Igor facilitates the use of Jenkins in Spinnaker pipelines (a pipeline can be triggered by a Jenkins job or invoke a Jenkins job) |
-| Orca	| 8083 | Orca handles pipeline and task orchestration (ie. starting a cloud driver operation and waiting until it completes). |
-| Rosco	| 8087 | Rosco is a packer-based bakery. We believe in immutable infrastructure and rosco provides a means to take a Debian or Red Hat package and turn it into an Amazon Machine Image. Don’t worry, it also supports Google Compute Engine and Azure images. |
-| Fiat	| 7003 | Fiat is the authorization server for the Spinnaker system.  It exposes a RESTful interface for querying the access permissions for a particular user. |
-
-## Install Helm 
-Download and install helm binary
-From https://github.com/kubernetes/helm/blob/master/docs/quickstart.md
+### Installing Helm
+1. Download and install the helm binary
 ```shell
-$ wget https://storage.googleapis.com/kubernetes-helm/helm-v2.4.2-linux-amd64.tar.gz
-$ sudo tar -C /usr/local -xzf helm-v2.4.2-linux-amd64.tar.gz
+wget https://storage.googleapis.com/kubernetes-helm/helm-v2.5.0-linux-amd64.tar.gz
 ```
 
-Add Helm to PATH
+1. Unzip the file to your local system:
 ```shell
-$ export PATH=$PATH:/usr/local/linux-amd64
-```
- 
-# Initialize local CLI
-NOTE:  Does the directory matter for anything?
-```shell
-$ helm init
+tar zxfv helm-v2.5.0-linux-amd64.tar.gz
+cp linux-amd64/helm .
 ```
 
-## Configure Spinnaker
-
-First, update the values file with your project id.
+1. Initialize Helm. This ensures that the server side of Helm (Tiller) is properly installed in your cluster.
 ```shell
-$ sed -i.bak s/REPLACE_ME/$(gcloud info --format='value(config.project)')/g ./config/values.yaml
+./helm init
+./helm update
 ```
 
-Next, copy your service account credentials into values.yaml.
-
-Copy the output form the following command into values.yaml, replacing ```<SERVICE_ACCOUNT_JSON>```
-
+1. Ensure Helm is properly installed by running the following command. You should see versions appear for both the server and the client of ```v2.5.0```:
 ```shell
-$ SERVICE_ACCOUNT_JSON=$(cat account.json) && echo $SERVICE_ACCOUNT_JSON
+./helm version
+Client: &version.Version{SemVer:"v2.5.0", GitCommit:"012cb0ac1a1b2f888144ef5a67b8dab6c2d45be6", GitTreeState:"clean"}Server: &version.Version{SemVer:"v2.5.0", GitCommit:"012cb0ac1a1b2f888144ef5a67b8dab6c2d45be6", GitTreeState:"clean"}
 ```
-TODO: Make this a sed operation
+### Configure Spinnaker
+1. Create a bucket for spinnaker to store its pipeline configuration:
 ```shell
-$ nano ./config/values.yaml 
+export PROJECT=$(gcloud info --format='value(config.project)')
+export BUCKET=$PROJECT-spinnaker-config
+gsutil mb -c regional -l us-central1 gs://$BUCKET
 ```
- 
-```shell
+1. Create your configuration file by pasting the following commands into your Cloud Shell:
+```
+export SA_JSON=`cat spinnaker-sa.json`
+cat > spinnaker-config.yaml <<EOF
+storageBucket: $BUCKET
+gcs:
+  enabled: true
+  project: $PROJECT
+  jsonKey: '$SA_JSON'
+
 # Disable minio the default
 minio:
   enabled: false
- 
-# Enable gcs
-gcs:
-  enabled: true
-  project: <my-project-name>
-  jsonKey: '<SERVICE_ACCOUNT_JSON>'
- 
-# Name has to be unique in GCS.
-storageBucket: <my-project-name>-spinnaker 
- 
+
 # Configure your Docker registries here
 accounts:
 - name: gcr
   address: https://gcr.io
   username: _json_key
-  password: '<SERVICE_ACCOUNT_JSON>'
+  password: '$SA_JSON'
   email: 1234@5678.com
+EOF
 ```
 
-## Deploy Spinnaker Chart
-
-### Temporary get the updated chart
-```shell
-$ git clone https://github.com/kubernetes/charts && cd charts
-
-$ git fetch origin pull/1338/head:test-chart
-$ git checkout test-chart
-
-# update the dependencies
-$ cd stable/spinnaker/
-$ helm dep up 
-
-$ cd ../../../
-```
-
-## Install spinnaker
-NOTE: This is going to take a while. 
-```shell
-$ helm install ./charts/stable/spinnaker --name cd -f ./config/values.yaml --timeout 600
-```
-In another tab, you can monitor the progress of the installation. 
-Errors will happen this is to be expected while the pods sync up.
-```shell
-$ kubectl get pods -w
-```
-
-## Access the spinnaker UI
+## Deploying the Spinnaker Chart
+1. Use the Helm CLI to deploy the chart with your configuration set. 
+> **Note:** This command typically takes 5-10 minutes to complete.
 
 ```shell
-$ DECK_POD=$(kubectl get pods -l "component=deck,app=cd-spinnaker"  \
-    -o jsonpath="{.items[0].metadata.name}")
-$ kubectl port-forward $DECK_POD 9000 >>/dev/null &
+./helm install -n cd stable/spinnaker -f spinnaker-config.yaml --timeout 600 --version 0.3.1
 ```
- 
-Visit the Spinnaker UI by opening your browser to: http://127.0.0.1:9000
 
-
-### Misc / Monitor Progresss / Troubleshoot / Debug Installation
-Everything in this helm chart will be labeled cd-spinnaker, so you can search for things like: 
+1. Once that command completes, run the following command to setup port forwarding to the Spinnaker U from the Cloud Shell
 ```shell
-$ kubectl get deployment -l app=cd-spinnaker
+export DECK_POD=$(kubectl get pods --namespace default -l "component=deck" -o jsonpath="{.items[0].metadata.name}")
+kubectl port-forward --namespace default $DECK_POD 8080:9000 >> /dev/null &
 ```
+To get to the Spinnaker user interface, click on the Web Preview button in cloud shell, then click “Preview on port 8080”
+![](../docs/img/PLACEHOLDER.png)
 
-NOTE: If you want to make a quick change.  Helm can do a blue green deployment via upgrade.
-```shell
-$ helm upgrade cd ./charts/stable/spinnaker -f updated-values.yaml
-```
+You should now see the following screen:
+![](../docs/img/PLACEHOLDER.png)
 
-Debugging can be done with
-```shell
-$ kubectl logs <pod name>
-```
-
-TODO:  Move this somewhere else.
-To delete everything
-```shell
-$ helm delete cd --purge
-```
- 
-get the latest list of charts
-```shell
-$ helm repo update
-```
-
-Common problems
-Front50 will fail if the GCS bucket name is not unique.
