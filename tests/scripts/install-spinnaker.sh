@@ -53,7 +53,7 @@ EOF
 ./helm install -n cd stable/spinnaker -f spinnaker-config.yaml --version 0.3.1 --timeout 600
 
 export DECK_POD=$(kubectl get pods --namespace default -l "component=deck" -o jsonpath="{.items[0].metadata.name}")
-kubectl port-forward --namespace default $DECK_POD 8080:9000 &
+kubectl port-forward --namespace default $DECK_POD 8080:9000 >> /dev/null &
 sleep 10
 curl localhost:8080
 
@@ -67,5 +67,6 @@ gcloud source repos create sample-app
 git config credential.helper gcloud.sh
 export PROJECT=$(gcloud info --format='value(config.project)')
 git remote add origin https://source.developers.google.com/p/$PROJECT/r/sample-app
-
 git push origin master
+
+kill %1
