@@ -1,5 +1,5 @@
 # Installing Spinnnaker
-You will use Helm to install Spinnaker from the Charts repository. Helm is a package manager that makes it easy to configure and deploy Kubernetes applications.
+In this lab, you will use Helm to install Spinnaker from the Charts repository. Helm is a package manager that makes it easy to configure and deploy Kubernetes applications.  Once you have Spinnaker installed, you'll be able to set up your CI/CD pipleline.
 
 ### Installing Helm
 1. Download and install the helm binary
@@ -74,3 +74,5 @@ To get to the Spinnaker user interface, click on the Web Preview button in cloud
 You should now see the following screen:
 ![](../docs/img/PLACEHOLDER.png)
 
+# What's Next
+Now that you have Spinnaker installed on your GKE cluster, it's time to create container images to deploy in the pipeline we'll be creating later.
