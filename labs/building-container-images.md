@@ -1,7 +1,7 @@
 # Building the Docker Image
 
 In this lab, we'll use a build trigger to connect Google Source Repository to Google Container Registry.
-After this module, whenever we tag an image for release, we'll kick off a spinnaker deployment.
+After this module, whenever we tag an image for release, we'll automatically kick off a spinnaker deployment.
 
 ## Creating your Source Code Repository
 1. Download the source code:
@@ -82,8 +82,14 @@ Now any Git tag with prefixed with the letter “v” that gets pushed to your r
 1. Create a git tag:
 ```shell
 git tag v1.0.0
-Push the tag
+```
+1. Push the tag
+```shell
 git push --tags
 ```
 1. In the Container Builder Build History console you should see a build has been triggered:
 ![](../docs/img/PLACEHOLDER.png)
+
+## What's Next
+
+Now that you have set up build triggers to create application container images, it's time to create a Spinnaker pipeline that consumes those images and deploys them through our CI/CD pipeline.
