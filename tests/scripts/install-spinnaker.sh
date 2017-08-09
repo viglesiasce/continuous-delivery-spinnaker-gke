@@ -43,6 +43,8 @@ minio:
 accounts:
 - name: gcr
   address: https://gcr.io
+  repositories:
+  - $PROJECT/sample-app
   username: _json_key
   password: '$SA_JSON'
   email: 1234@5678.com
