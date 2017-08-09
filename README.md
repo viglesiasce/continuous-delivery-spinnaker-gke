@@ -21,7 +21,7 @@ In this tutorial, you will build the following pipeline:
 1. [Installing Spinnaker](labs/installing-spinnaker.md)
 1. [Building Container Images](labs/building-container-images.md)
 1. [Creating Your Pipeline](labs/creating-your-pipeline.md)
-1. [Triggering Deployments](labs/triggering-deployments-v2.md)
+1. [Triggering Deployments](labs/triggering-deployments.md)
 1. [Workshop Cleanup](labs/workshop-cleanup.md)
 
 ## What Next?
