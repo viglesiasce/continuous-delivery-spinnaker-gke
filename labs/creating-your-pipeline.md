@@ -42,4 +42,6 @@ sed s/PROJECT/$PROJECT/g spinnaker/pipeline-deploy.json | curl -d@- -X POST --he
   ![](../docs/img/PLACEHOLDER.png)
 
 
+## What's Next
 
+With a pipeline in place it's time to use it to deploy container images.
