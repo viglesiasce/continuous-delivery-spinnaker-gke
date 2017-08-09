@@ -1,8 +1,8 @@
 # Workshop setup
+In this lab you'll be setting up a Google Container Engine (GKE) cluster and a Cloud Identity and Access Management (Cloud IAM) so that you'll have enough resources and permissions to run Spinnaker and your sample application.
 
-### Prerequisites
-1. A Google Cloud Platform Account
-1. After signing into your GCP Account, [Click here to enable the Google Compute Engine and Google Container Engine APIs](https://console.cloud.google.com/flows/enableapi?apiid=compute_component,container)
+## Before you begin
+Enable the Container Engine API by following [this link](https://console.cloud.google.com/flows/enableapi?apiid=container).
 
 ## Start a Cloud Shell instance
 
@@ -10,29 +10,7 @@
 1. The rest of the tutorial should be executed from inside the Cloud Shell.
 
 
-## Setup
-
-1. In the shell, set your default compute zone:
-
-  ```shell
-  $ gcloud config set compute/zone us-east1-d
-  ```
-
-## Get the Code
-
-1. Clone the lab repository in your shell, then `cd` into that dir:
-
-  ```shell
-  $ git clone https://github.com/askcarter/spinnaker-k8s-workshop.git
-  Cloning into 'spinnaker-k8s-workshop'...
-  ...
-
-  $ cd spinnaker-k8s-workshop
-  ```
-
-## Cluster Setup
-
-### Create Cluster
+## Create Google Container Engine Cluster
 
 You will need a Container Engine cluster to deploy Spinnaker and the sample application. The cluster requires the storage-rw authentication scope for Spinnaker to store its pipeline data in Cloud Storage:
 1. Enable the Container Engine API by following this link.
@@ -64,3 +42,6 @@ gcloud projects add-iam-policy-binding $PROJECT --role roles/storage.admin --mem
 ```shell
 gcloud iam service-accounts keys create spinnaker-sa.json --iam-account $SA_EMAIL
 ```
+
+## What's Next
+Now that you have a working cluster and a Cloud IAM service account, it's time to install Spinnaker!
