@@ -1,4 +1,6 @@
 # Triggering Deployments
+Deploying container images can happen, manually or automatically.  In this lab, you'll do both: a manual deployment through the Spinnaker UI and an automatic deployment using the Container Builder Build Trigger we set up previously.
+
 
 ## Running your pipeline manually
 1. Return to the Pipelines page by clicking on the “Pipelines” button
@@ -39,3 +41,13 @@ git push --tags
   ![](../docs/img/PLACEHOLDER.png)
 1. After a couple of minutes your pipeline should show in the Pipelines view. Once the pipeline completes your app should look like this:
   ![](../docs/img/PLACEHOLDER.png)
+
+## What's Next
+
+At this point, you've got a working CI/CD pipeline taht can automatically build and deploy application containers when you tag a commit, from your command line!
+
+Some quesitons to consider:
+* How do you roll back a change?
+* How would you add change this setup to work for your production environment?
+
+After answer those questions, move on to the next section where we clean up the resources we've used.
