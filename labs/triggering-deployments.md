@@ -50,4 +50,4 @@ Some quesitons to consider:
 * How do you roll back a change?
 * How would you add change this setup to work for your production environment?
 
-After answer those questions, move on to the next section where we clean up the resources we've used.
+In the next section, you'll clean up the resources we've allocated.
