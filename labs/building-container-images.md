@@ -89,7 +89,11 @@ In the Google Cloud Console, set the build trigger to:
 1. Click “Create Trigger”
 
 
-Now any Git tag with prefixed with the letter “v” that gets pushed to your repository will get built automatically as an image. Push your first image by doing the following:
+Now any Git tag with prefixed with the letter “v” that gets pushed to your repository will get built automatically as an image. 
+
+
+Push your first image by doing the following:
+
 1. Go to your source code folder in Cloud Shell
 1. Create a git tag:
 
