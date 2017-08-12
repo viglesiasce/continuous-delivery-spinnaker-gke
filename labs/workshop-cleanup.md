@@ -1,5 +1,8 @@
 # Workshop Cleanup
 
+It's important to cleanup the resources you've used when you're done, since unused resources can cost you money.
+
+
 1. Delete the Spinnaker installation
 ../helm delete --purge cd
 1. Delete the sample app services
@@ -36,3 +39,7 @@ export PROJECT=$(gcloud info --format='value(config.project)')
 gcloud container images delete gcr.io/$PROJECT/sample-app:v1.0.0
 gcloud container images delete gcr.io/$PROJECT/sample-app:v1.0.1
 ```
+
+## What's Next
+
+You've successfully installed and run a Spinnaker Pipeline on GKE. Check the What's Next section on the main repo page for resources to further your learning.
