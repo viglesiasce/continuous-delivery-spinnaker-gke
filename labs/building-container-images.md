@@ -60,10 +60,10 @@ https://console.cloud.google.com/code/develop/browse/sample-app/master
 ## Configuring your Container Builder Triggers
 In this section, you will configure Container Builder to build and push your images every time there is a Git tag pushed to your source repository. Container Builder will automatically check out your source code, build the Docker image from the Dockerfile in your repo and then push that image to Google Container Registry.
 
-![](../docs/img/Setup-build-trigger.png)
+![](../docs/img/image1.png)
 
 In the Google Cloud Console, set the build trigger to: 
- 'Changes pushed to "v.*" tag will trigger a build of "gcr.io/askcarter-production-gke/$REPO_NAME:$TAG_NAME"'
+ 'Changes pushed to "v.*" tag will trigger a build of "gcr.io/<YOUR-PROJECT-NAME>/$REPO_NAME:$TAG_NAME"'
 
 1. Go to the Build Triggers UI in the Cloud Console
 1. Select Cloud Source Repository, then click Continue
@@ -74,6 +74,7 @@ In the Google Cloud Console, set the build trigger to:
   Tag (regex): v.*
   Build Configuration: cloudbuild.yaml
   cloudbuild.yaml location: cloudbuild.yaml
+  ![](../docs/img/image23.png)
 1. Click “Create Trigger”
 
 
@@ -88,7 +89,7 @@ git tag v1.0.0
 git push --tags
 ```
 1. In the Container Builder Build History console you should see a build has been triggered:
-![](../docs/img/PLACEHOLDER.png)
+![](../docs/img/image22.png)
 
 ## What's Next
 
