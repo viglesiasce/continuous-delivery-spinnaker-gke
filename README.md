@@ -5,7 +5,12 @@
 | Tutorial      | ![badge](https://concourse.dev.vicnastea.io/api/v1/teams/main/pipelines/gke-info-post-submit/jobs/test-tutorial/badge) |
 | Build App     | ![badge](https://concourse.dev.vicnastea.io/api/v1/teams/main/pipelines/gke-info-post-submit/jobs/build-gke-info/badge)|
 
-# Continuous Delivery with Spinnaker and Kubernetes (in 40 minutes or less)
+# Continuous Delivery with Spinnaker and Kubernetes
+
+This tutorial takes you through the process of creating a reliable and robust continuous delivery pipeline using Google Container Engine, Google Cloud Source Repositories, Google Cloud Container Builder, and Spinnaker. You deploy your code changes in an automated fashion with the ability to quickly roll back your deployments. Below is a high level architecture diagram of the services you use and software you deploy to accomplish this: 
+
+![](./docs/img/image21.png)
+
 
 To continuously deliver updates to your users, you will need to create an automated process that can reliably build, test and update your software. Changes to your code should be automatically taken through a pipeline that includes artifact creation, unit testing, functional testing and production roll out. In some cases you will want to have code hit a subset of your users so that it is being exercised in a realistic way before being rolled out to your entire fleet of machines. This procedure, canary releases, is facilitated by having the ability to quickly rollback software changes that do not provide the intended results.
 
