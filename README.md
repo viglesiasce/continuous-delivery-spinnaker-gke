@@ -13,7 +13,7 @@ With Container Engine and Spinnaker we can create a robust continuous delivery f
 
 In this tutorial, you will build the following pipeline:
 
-![](../docs/img/PLACEHOLDER.png)
+![](./docs/img/image1.png)
 
 ## Labs
 
