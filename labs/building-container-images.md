@@ -21,15 +21,17 @@ cd sample-app
 
 1. Set the username and email address for your Git commits in this repository.
 
+> **NOTE:** Replace [EMAIL_ADDRESS] with your Git email address.
+
 ```shell
 git config --global user.email "[EMAIL_ADDRESS]"
 ```
-Replace [EMAIL_ADDRESS] with your Git email address.
+
+> **NOTE:** Replace [USERNAME] with your Git username.
 
 ```shell
 git config --global user.name "[USERNAME]"
 ```
-Replace [USERNAME] with your Git username.
 
 1. Make the initial commit to your source code repository
 ```shell
