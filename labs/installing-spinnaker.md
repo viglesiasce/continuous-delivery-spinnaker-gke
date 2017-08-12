@@ -69,10 +69,10 @@ export DECK_POD=$(kubectl get pods --namespace default -l "component=deck" -o js
 kubectl port-forward --namespace default $DECK_POD 8080:9000 >> /dev/null &
 ```
 To get to the Spinnaker user interface, click on the Web Preview button in cloud shell, then click “Preview on port 8080”
-![](../docs/img/PLACEHOLDER.png)
+![](../docs/img/image12.png)
 
 You should now see the following screen:
-![](../docs/img/PLACEHOLDER.png)
+![](../docs/img/image5.png)
 
 # What's Next
 Now that you have Spinnaker installed on your GKE cluster, it's time to create container images to deploy in the pipeline we'll be creating later.
