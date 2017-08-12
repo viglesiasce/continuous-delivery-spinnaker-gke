@@ -44,4 +44,4 @@ You will now create the continuous delivery pipeline from the Spinnaker UI. This
 
 ## What's Next
 
-With a pipeline in place it's time to use it to deploy container images.
+With a pipeline in place, it's time to use it to deploy container images.
