@@ -17,7 +17,7 @@ Deploying container images can happen, manually or automatically.  In this lab, 
   ![](../docs/img/image16.png)
 1. Scroll down the list of Load Balancers and click on Default, under “sample-frontend-prod”
   ![](../docs/img/image6.png)
-1. Scroll down the details pane on the right and click the clipboard button on the Ingress to copy your apps IP address.
+1. Scroll down the details pane on the right and click the clipboard button ![](../docs/img/image9.png) on the Ingress to copy your apps IP address.
   ![](../docs/img/image4.png)
 1. Paste the address into your browser to view the app:
   ![](../docs/img/image13.png)
