@@ -63,7 +63,7 @@ In this section, you will configure Container Builder to build and push your ima
 ![](../docs/img/image1.png)
 
 In the Google Cloud Console, set the build trigger to: 
- 'Changes pushed to "v.*" tag will trigger a build of "gcr.io/<YOUR-PROJECT-NAME>/$REPO_NAME:$TAG_NAME"'
+ 'Changes pushed to "v.*" tag will trigger a build of "gcr.io/YOUR-PROJECT-NAME/$REPO_NAME:$TAG_NAME"'
 
 1. Go to the Build Triggers UI in the Cloud Console
 1. Select Cloud Source Repository, then click Continue
