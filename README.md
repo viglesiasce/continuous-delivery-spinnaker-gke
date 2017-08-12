@@ -7,7 +7,7 @@
 
 # Continuous Delivery with Spinnaker and Kubernetes
 
-This tutorial takes you through the process of creating a reliable and robust continuous delivery pipeline using Google Container Engine, Google Cloud Source Repositories, Google Cloud Container Builder, and Spinnaker. You deploy your code changes in an automated fashion with the ability to quickly roll back your deployments. Below is a high level architecture diagram of the services you use and software you deploy to accomplish this: 
+This tutorial takes you through the process of creating a reliable and robust continuous delivery pipeline using Google Container Engine (GKE), Google Cloud Source Repositories (GSR), Google Cloud Container Builder (GCB), and Spinnaker. You deploy your code changes in an automated fashion with the ability to quickly roll back your deployments. Below is a high level architecture diagram of the services you use and software you deploy to accomplish this: 
 
 ![](./docs/img/image21.png)
 
