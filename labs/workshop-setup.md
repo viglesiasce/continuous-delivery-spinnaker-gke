@@ -1,5 +1,5 @@
 # Workshop setup
-In this lab you'll be setting up a Google Container Engine (GKE) cluster and a Cloud Identity and Access Management (Cloud IAM) so that you'll have enough resources and permissions to run Spinnaker and your sample application.
+In this lab you'll be setting up a Google Container Engine (GKE) cluster and a Cloud Identity and Access Management (Cloud IAM) Servicve Account so that you'll have enough resources and permissions to run Spinnaker and your sample application.
 
 ## Before you begin
 Enable the Container Engine API by following [this link](https://console.cloud.google.com/flows/enableapi?apiid=container).
