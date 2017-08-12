@@ -44,6 +44,6 @@ At this point, you've got a working CI/CD pipeline taht can automatically build 
 
 Some quesitons to consider:
 * How do you roll back a change?
-* How would you add change this setup to work for your production environment?
+* How would you add to or change this setup to work for your production environment?
 
 In the next section, you'll clean up the resources we've allocated.
