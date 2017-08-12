@@ -28,13 +28,15 @@ kubectl apply -f k8s/services
 You will now create the continuous delivery pipeline from the Spinnaker UI. This pipeline will detect when images are pushed to your repository with a tag prefixed with “v”.
 
 1. In a new tab of the Cloud Shell, run the following command in the source code directory to upload an example pipeline to your Spinnaker instance:
-```shell
-export PROJECT=$(gcloud info --format='value(config.project)')
-sed s/PROJECT/$PROJECT/g spinnaker/pipeline-deploy.json | curl -d@- -X POST --header "Content-Type: application/json" --header "Accept: */*" http://localhost:8080/gate/pipelines
-```
-1.In the Spinnaker UI, click the Pipelines button along the top navigation bar
+
+    ```shell
+    export PROJECT=$(gcloud info --format='value(config.project)')
+    sed s/PROJECT/$PROJECT/g spinnaker/pipeline-deploy.json | curl -d@- -X POST --header "Content-Type: application/json" -- header "Accept: */*" http://localhost:8080/gate/pipelines
+    ```
+
+1. In the Spinnaker UI, click the Pipelines button along the top navigation bar
   ![](../docs/img/image24.png)
-1.Click on the “Configure” button in the Deploy pipeline
+1. Click on the “Configure” button in the Deploy pipeline
   ![](../docs/img/image14.png)
 1. You should see the continuous delivery pipeline configuration in the UI:
   ![](../docs/img/image2.png)
