@@ -4,12 +4,15 @@ In this lab, we'll use a build trigger to connect Google Source Repository to Go
 After this module, whenever we tag an image for release, we'll automatically kick off a spinnaker deployment.
 
 ## Creating your Source Code Repository
+
 1. Download the source code:
+
 ```source
 wget https://gke-spinnaker.storage.googleapis.com/sample-app.tgz
 ```
 
 1. Unpack the source code
+  
 ```shell
 tar xzfv sample-app.tgz
 ```
