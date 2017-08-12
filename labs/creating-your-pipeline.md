@@ -1,21 +1,19 @@
 # Creating Your Pipeline
 
-![](../docs/img/pipeline-overview.png)
-
 Now that you have your images building automatically, you need to deploy it to the Kubernetes cluster.
 
 You deploy to a scaled down environment for integration testing. Once the integration tests pass, you will need to do a manual approval to deploy the code to go to production services.
  
-![](../docs/img/PLACEHOLDER.png)
+![](../docs/img/image15.png)
 
 ## Create the application
 1. In the Spinnaker UI, click on the “Actions” button, then click “Create Application”
-  ![](../docs/img/PLACEHOLDER.png)
+  ![](../docs/img/image19.png)
 1. In the dialog box fill in:
   Name: sample
   Owner Email: <your email address>
 1. Then click Create
-  ![](../docs/img/PLACEHOLDER.png)
+  ![](../docs/img/image20.png)
 
 
 ## Create Service Load Balancers
@@ -35,11 +33,11 @@ export PROJECT=$(gcloud info --format='value(config.project)')
 sed s/PROJECT/$PROJECT/g spinnaker/pipeline-deploy.json | curl -d@- -X POST --header "Content-Type: application/json" --header "Accept: */*" http://localhost:8080/gate/pipelines
 ```
 1.In the Spinnaker UI, click the Pipelines button along the top navigation bar
-  ![](../docs/img/PLACEHOLDER.png)
+  ![](../docs/img/image24.png)
 1.Click on the “Configure” button in the Deploy pipeline
-  ![](../docs/img/PLACEHOLDER.png)
+  ![](../docs/img/image14.png)
 1. You should see the continuous delivery pipeline configuration in the UI:
-  ![](../docs/img/PLACEHOLDER.png)
+  ![](../docs/img/image2.png)
 
 
 ## What's Next
