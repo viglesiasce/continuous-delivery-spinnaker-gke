@@ -8,19 +8,13 @@ After this module, whenever we tag an image for release, we'll automatically kic
 1. Download the source code:
 
     ```source
-    wget https://gke-spinnaker.storage.googleapis.com/sample-app.tgz
+    git clone https://github.com/viglesiasce/continuous-delivery-spinnaker-gke
    ```
-
-1. Unpack the source code
-  
-    ```shell
-    tar xzfv sample-app.tgz
-    ```
 
 1. Go into the source code directory
 
     ```shell
-    cd sample-app
+    cd continuous-delivery-spinnaker-gke
     ```
 
 1. Set the username and email address for your Git commits in this repository.
@@ -37,14 +31,6 @@ After this module, whenever we tag an image for release, we'll automatically kic
     git config --global user.name "[USERNAME]"
     ```
 
-1. Make the initial commit to your source code repository
-
-    ```shell
-    git init
-    git add .
-    git commit -m "Initial commit"
-    ```
-
 1. Create a Cloud Source Repository to host your code
 
     ```shell
@@ -56,6 +42,7 @@ After this module, whenever we tag an image for release, we'll automatically kic
 
     ```shell
     export PROJECT=$(gcloud info --format='value(config.project)')
+    git remote rm origin
     git remote add origin https://source.developers.google.com/p/$PROJECT/r/sample-app
     ```
 
