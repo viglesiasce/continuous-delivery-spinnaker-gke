@@ -1,11 +1,9 @@
-# GKE Info 
+# Continuous Delivery with Spinnaker and Kubernetes
 
 | Test          |   Result      |
 | ------------- |---------------|
 | Tutorial      | ![badge](https://concourse.dev.vicnastea.io/api/v1/teams/main/pipelines/gke-info-post-submit/jobs/test-tutorial/badge) |
 | Build App     | ![badge](https://concourse.dev.vicnastea.io/api/v1/teams/main/pipelines/gke-info-post-submit/jobs/build-gke-info/badge)|
-
-# Continuous Delivery with Spinnaker and Kubernetes
 
 This tutorial takes you through the process of creating a reliable and robust continuous delivery pipeline using Google Container Engine (GKE), Google Cloud Source Repositories (GSR), Google Cloud Container Builder (GCB), and Spinnaker. You deploy your code changes in an automated fashion with the ability to quickly roll back your deployments. Below is a high level architecture diagram of the services you use and software you deploy to accomplish this: 
 
