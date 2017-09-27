@@ -17,7 +17,7 @@ You will need a Container Engine cluster to deploy Spinnaker and the sample appl
 1. Then run the following comamnds in the cloud shell console:
 ```shell
 gcloud config set compute/zone us-central1-f
-gcloud container clusters create spinnaker-tutorial --cluster-version 1.6.7 --machine-type=n1-standard-2
+gcloud container clusters create spinnaker-tutorial --cluster-version 1.6.10 --machine-type=n1-standard-2
 ```
 
 ## Configuring IAM
