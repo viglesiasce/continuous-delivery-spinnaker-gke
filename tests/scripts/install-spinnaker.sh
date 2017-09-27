@@ -1,6 +1,6 @@
 #!/bin/bash -xe
 gcloud config set compute/zone us-central1-f
-gcloud container clusters create spinnaker-tutorial --cluster-version 1.6.7 --machine-type=n1-standard-2
+gcloud container clusters create spinnaker-tutorial --cluster-version 1.6.10 --machine-type=n1-standard-2
 gcloud iam service-accounts create  spinnaker-storage-account  --display-name spinnaker-storage-account
 
 # Needed to ensure SA gets role properly?
