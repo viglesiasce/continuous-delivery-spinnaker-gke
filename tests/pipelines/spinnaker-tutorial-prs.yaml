@@ -1,0 +1,57 @@
+resource_types:
+- name: pull-request
+  type: docker-image
+  source:
+    repository: jtarchie/pr
+resources:
+- name: gke-info
+  type: pull-request
+  source:
+    access_token: {{github_access_token}}
+    repo: viglesiasce/continuous-delivery-spinnaker-gke
+    label: ok-to-test
+jobs:
+- name: test-tutorial
+  serial: true
+  plan:
+  - do:
+    - get: gke-info
+      trigger: true
+      params:
+        fetch_merge: true
+    - task: install-spinnaker
+      file: gke-info/tests/tasks/install-spinnaker.yaml
+      params:
+        service_account_json: {{service_account_json}}
+      on_success:
+        put: gke-info
+        params:
+          path: gke-info
+          status: success
+          context: concourse-ci/install-spinnaker
+      on_failure:
+        put: gke-info
+        params:
+          path: gke-info
+          status: failure
+          context: concourse-ci/install-spinnaker
+- name: build-gke-info
+  plan:
+  - get: gke-info
+    trigger: true
+    params:
+      fetch_merge: true
+  - task: build-gke-info
+    file: gke-info/tests/tasks/build-gke-info.yaml
+    on_success:
+      put: gke-info
+      params:
+        path: gke-info
+        status: success
+        context: concourse-ci/build-gke-info
+    on_failure:
+      put: gke-info
+      params:
+        path: gke-info
+        status: failure
+        context: concourse-ci/build-gke-info
