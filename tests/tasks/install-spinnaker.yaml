@@ -21,13 +21,16 @@ run:
     EOF
     apt-get install -y git openssl wget
     gcloud auth activate-service-account --key-file=service_account.json
+    PROJECT_NAME=spinnaker-tutorial-test-$(date +%s) 
+    gcloud projects create $PROJECT_NAME
+    gcloud config set project $PROJECT_NAME
 
     cd gke-info
     # Setup email
     echo "Spinnaker Tutorial: Failed to run tutorial" > ../email/subject-failed
     git --no-pager show > ../email/body-failed
 
-    ./tests/scripts/cleanup.sh | tee ../email/body-failed
     ./tests/scripts/install-spinnaker.sh | tee ../email/body-failed
+    gcloud projects delete $PROJECT_NAME
 
     
