@@ -11,15 +11,23 @@ export PROJECT=$(gcloud info --format='value(config.project)')
 gcloud projects add-iam-policy-binding $PROJECT --role roles/storage.admin --member serviceAccount:$SA_EMAIL
 gcloud iam service-accounts keys create spinnaker-sa.json --iam-account $SA_EMAIL
 
-wget https://storage.googleapis.com/kubernetes-helm/helm-v2.5.0-linux-amd64.tar.gz
-tar zxfv helm-v2.5.0-linux-amd64.tar.gz
+export HELM_VERSION=2.7.2
+wget https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-amd64.tar.gz
+tar zxfv helm-v${HELM_VERSION}-linux-amd64.tar.gz
 cp linux-amd64/helm .
-./helm init
+
+# Give tiller cluster-admin role service account
+kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$(gcloud config get-value account)
+kubectl create serviceaccount tiller --namespace kube-system
+kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --service-account=kube-system:tilller
+
+# Initialize Helm
+./helm init --service-account tiller
 ./helm update
 # Give tiller a chance to start up
 # TODO: Change this to polling
 sleep 180
-./helm version | grep 2.5.0
+./helm version | grep ${HELM_VERSION}
 
 export PROJECT=$(gcloud info --format='value(config.project)')
 export BUCKET=$PROJECT-spinnaker-config
