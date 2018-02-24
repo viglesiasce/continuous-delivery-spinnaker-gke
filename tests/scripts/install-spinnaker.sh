@@ -19,7 +19,7 @@ cp linux-amd64/helm .
 # Give tiller cluster-admin role service account
 kubectl create clusterrolebinding user-admin-binding --clusterrole=cluster-admin --user=$(gcloud config get-value account)
 kubectl create serviceaccount tiller --namespace kube-system
-kubectl create clusterrolebinding tiller-admin-binding --clusterrole=cluster-admin --serviceaccount=kube-system:tilller
+kubectl create clusterrolebinding tiller-admin-binding --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
 
 # Initialize Helm
 ./helm init --service-account tiller
