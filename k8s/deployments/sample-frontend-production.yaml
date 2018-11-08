@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: gcr.io/vic-spinnaker-tutorial-2/sample-app
+        image: gcr.io/PROJECT/sample-app
         resources:
           limits:
             memory: "500Mi"
