@@ -20,8 +20,8 @@ gcloud beta pubsub subscriptions create gcr-triggers \
 export SA_EMAIL=$(gcloud iam service-accounts list \
     --filter="displayName:spinnaker-account" \
     --format='value(email)')
-gcloud projects add-iam-policy-binding $PROJECT \
-    --role roles/pubsub.subscriber --member serviceAccount:$SA_EMAIL
+gcloud beta pubsub subscriptions add-iam-policy-binding gcr-triggers \
+        --role roles/pubsub.subscriber --member serviceAccount:$SA_EMAIL
 
 # Deploy Spinnaker using Helm
 wget https://storage.googleapis.com/kubernetes-helm/helm-v2.10.0-linux-amd64.tar.gz
