@@ -14,7 +14,7 @@ gcloud projects add-iam-policy-binding \
 gcloud iam service-accounts keys create spinnaker-sa.json --iam-account $SA_EMAIL
 
 # Create PubSub trigger
-gcloud beta pubsub topics create projects/$PROJECT/topics/gcr
+gcloud beta pubsub topics create projects/$PROJECT/topics/gcr || true
 gcloud beta pubsub subscriptions create gcr-triggers \
     --topic projects/${PROJECT}/topics/gcr
 export SA_EMAIL=$(gcloud iam service-accounts list \
