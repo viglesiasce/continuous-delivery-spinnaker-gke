@@ -29,5 +29,3 @@ run:
 
     ./tests/scripts/cleanup.sh | tee ../email/body-failed
     ./tests/scripts/install-spinnaker.sh | tee ../email/body-failed
-
-    
