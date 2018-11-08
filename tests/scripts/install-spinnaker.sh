@@ -91,6 +91,9 @@ EOF
 
 export DECK_POD=$(kubectl get pods --namespace default -l "cluster=spin-deck" \
     -o jsonpath="{.items[0].metadata.name}")
+
+# Wiat for pods to settle before doing port-forward
+sleep 30
 kubectl port-forward --namespace default $DECK_POD 8080:9000 >> /dev/null &
 
 
