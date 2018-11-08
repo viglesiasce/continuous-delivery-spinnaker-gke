@@ -7,6 +7,7 @@ gcloud projects remove-iam-policy-binding $PROJECT --role roles/storage.admin --
 echo y | gcloud iam service-accounts delete $SA_EMAIL || true
 echo y | gcloud container clusters delete spinnaker-tutorial --zone us-central1-f || true
 echo y | gcloud source repos delete sample-app || true
+gcloud beta pubsub subscriptions delete gcr-triggers || true
 gsutil -m rm -r gs://$BUCKET || true
 rm -f spinnaker-sa.json
 rm -f spinnaker-config.yaml
