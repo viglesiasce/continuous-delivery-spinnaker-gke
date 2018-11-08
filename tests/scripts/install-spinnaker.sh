@@ -107,3 +107,28 @@ git config credential.helper gcloud.sh
 export PROJECT=$(gcloud info --format='value(config.project)')
 git remote add origin https://source.developers.google.com/p/$PROJECT/r/sample-app
 git push origin master
+
+# Setup K8s manifests
+export PROJECT=$(gcloud info --format='value(config.project)')
+gsutil mb -l us-central1 gs://$PROJECT-kubernetes-manifests
+gsutil versioning set on gs://$PROJECT-kubernetes-manifests
+sed -i s/PROJECT/$PROJECT/g k8s/deployments/*
+
+# Install spin CLI
+curl -LO https://storage.googleapis.com/spinnaker-artifacts/spin/$(curl -s https://storage.googleapis.com/spinnaker-artifacts/spin/latest)/linux/amd64/spin
+chmod +x spin
+
+# Create application
+./spin application save --application-name sample \
+                        --owner-email example@example.com \
+                        --cloud-providers kubernetes \
+                        --gate-endpoint http://localhost:8080/gate
+
+# Create pipeline
+export PROJECT=$(gcloud info --format='value(config.project)')
+sed s/PROJECT/$PROJECT/g spinnaker/pipeline-deploy.json > pipeline.json
+./spin pipeline save --gate-endpoint http://localhost:8080/gate -f pipeline.json
+
+# Push a tag
+git tag v1.0.0
+git push --tags
