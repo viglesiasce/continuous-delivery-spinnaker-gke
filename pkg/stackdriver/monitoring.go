@@ -9,6 +9,7 @@ import (
 	"google.golang.org/api/monitoring/v3"
 )
 
+// projectResource returns a full self link url for a project
 func projectResource(projectID string) string {
 	return "projects/" + projectID
 }

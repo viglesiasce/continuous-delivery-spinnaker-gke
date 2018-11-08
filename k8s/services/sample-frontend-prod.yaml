@@ -2,15 +2,17 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: sample-frontend-prod
-  name: sample-frontend-prod
+    app: sample-frontend-production
+  name: sample-frontend-production
 spec:
   ports:
-  - name: 80-80
+  - name: http
     port: 80
     protocol: TCP
     targetPort: 8080
   selector:
-    load-balancer-sample-frontend-prod: "true"
+    app: sample
+    role: frontend
+    env: production
   sessionAffinity: None
   type: LoadBalancer
