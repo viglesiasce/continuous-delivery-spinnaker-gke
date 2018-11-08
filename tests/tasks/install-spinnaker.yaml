@@ -18,6 +18,7 @@ run:
     cat > service_account.json <<EOF
     $service_account_json
     EOF
+    set -o pipefail
     apt-get install -y git openssl wget
     gcloud auth activate-service-account --key-file=service_account.json
 
