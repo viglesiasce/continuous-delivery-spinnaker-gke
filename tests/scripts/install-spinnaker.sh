@@ -137,3 +137,5 @@ sed s/PROJECT/$PROJECT/g spinnaker/pipeline-deploy.json > pipeline.json
 # Push a tag
 git tag v1.0.0
 git push --tags
+
+kill %1
