@@ -29,3 +29,4 @@ run:
 
     timeout 10m ./tests/scripts/cleanup.sh | tee ../email/body-failed
     timeout 30m ./tests/scripts/install-spinnaker.sh | tee ../email/body-failed
+    timeout 10m ./tests/scripts/cleanup.sh | tee ../email/body-failed
