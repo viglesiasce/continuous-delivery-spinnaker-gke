@@ -2,13 +2,14 @@
 gcloud config set compute/zone us-central1-f
 gcloud container clusters create spinnaker-tutorial \
         --machine-type=n1-standard-2
-gcloud iam service-accounts create  spinnaker-account \
-        --display-name spinnaker-account
+SA_NAME=spinnaker-account-$BUILD_ID
+gcloud iam service-accounts create $SA_NAME \
+        --display-name $SA_NAME
 
 # Needed to ensure SA gets role properly?
 sleep 60
 export SA_EMAIL=$(gcloud iam service-accounts list \
-    --filter="displayName:spinnaker-account" \
+    --filter="displayName:$SA_NAME" \
     --format='value(email)')
 export PROJECT=$(gcloud info --format='value(config.project)')
 gcloud projects add-iam-policy-binding \
@@ -20,7 +21,7 @@ gcloud beta pubsub topics create projects/$PROJECT/topics/gcr || true
 gcloud beta pubsub subscriptions create gcr-triggers \
     --topic projects/${PROJECT}/topics/gcr
 export SA_EMAIL=$(gcloud iam service-accounts list \
-    --filter="displayName:spinnaker-account" \
+    --filter="displayName:$SA_NAME" \
     --format='value(email)')
 gcloud beta pubsub subscriptions add-iam-policy-binding gcr-triggers \
         --role roles/pubsub.subscriber --member serviceAccount:$SA_EMAIL
