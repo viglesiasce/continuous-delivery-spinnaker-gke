@@ -27,5 +27,5 @@ run:
     echo "Spinnaker Tutorial: Failed to run tutorial" > ../email/subject-failed
     git --no-pager show > ../email/body-failed
 
-    ./tests/scripts/cleanup.sh | tee ../email/body-failed
-    ./tests/scripts/install-spinnaker.sh | tee ../email/body-failed
+    timeout 10m ./tests/scripts/cleanup.sh | tee ../email/body-failed
+    timeout 30m ./tests/scripts/install-spinnaker.sh | tee ../email/body-failed
