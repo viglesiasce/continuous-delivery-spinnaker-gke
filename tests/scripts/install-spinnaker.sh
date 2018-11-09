@@ -4,7 +4,9 @@ gcloud container clusters create spinnaker-tutorial \
         --machine-type=n1-standard-2
 gcloud iam service-accounts create  spinnaker-account \
         --display-name spinnaker-account
-        
+
+# Needed to ensure SA gets role properly?
+sleep 60
 export SA_EMAIL=$(gcloud iam service-accounts list \
     --filter="displayName:spinnaker-account" \
     --format='value(email)')
