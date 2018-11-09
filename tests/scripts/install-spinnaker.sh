@@ -94,7 +94,7 @@ export DECK_POD=$(kubectl get pods --namespace default -l "cluster=spin-deck" \
 
 # Wiat for pods to settle before doing port-forward
 sleep 30
-kubectl port-forward --namespace default $DECK_POD 8080:9000 >> /dev/null &
+kubectl port-forward --namespace default $DECK_POD 8080:9000 &
 
 
 until curl localhost:8080; do sleep 10;done
