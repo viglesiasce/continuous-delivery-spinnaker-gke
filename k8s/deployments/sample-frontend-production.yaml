@@ -3,6 +3,7 @@ apiVersion: extensions/v1beta1
 metadata:
   name: sample-frontend-production
 spec:
+  replicas: 4
   template:
     metadata:
       name: frontend
