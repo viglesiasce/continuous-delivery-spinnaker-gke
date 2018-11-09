@@ -122,10 +122,10 @@ curl -LO https://storage.googleapis.com/spinnaker-artifacts/spin/$(curl -s https
 chmod +x spin
 
 # Create application
-./spin application save --application-name sample \
+until timeout 1m ./spin application save --application-name sample \
                         --owner-email example@example.com \
                         --cloud-providers kubernetes \
-                        --gate-endpoint http://localhost:8080/gate
+                        --gate-endpoint http://localhost:8080/gate; do sleep 10;done
 
 # Create pipeline
 export PROJECT=$(gcloud info --format='value(config.project)')
