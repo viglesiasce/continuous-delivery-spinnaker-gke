@@ -2,7 +2,7 @@
 gcloud config set compute/zone us-central1-f
 gcloud container clusters create spinnaker-tutorial \
         --machine-type=n1-standard-2
-SA_NAME=spinnaker-account-$BUILD_ID
+SA_NAME=spinnaker-account-$(date +%s)
 gcloud iam service-accounts create $SA_NAME \
         --display-name $SA_NAME
 
