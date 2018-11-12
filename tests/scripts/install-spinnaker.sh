@@ -6,8 +6,6 @@ SA_NAME=spinnaker-account-$(date +%s)
 gcloud iam service-accounts create $SA_NAME \
         --display-name $SA_NAME
 
-# Needed to ensure SA gets role properly?
-sleep 60
 export SA_EMAIL=$(gcloud iam service-accounts list \
     --filter="displayName:$SA_NAME" \
     --format='value(email)')
