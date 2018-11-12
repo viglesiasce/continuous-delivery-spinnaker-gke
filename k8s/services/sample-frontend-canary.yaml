@@ -11,6 +11,8 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    load-balancer-sample-frontend-canary: "true"
+    app: sample
+    role: frontend
+    env: canary
   sessionAffinity: None
   type: LoadBalancer

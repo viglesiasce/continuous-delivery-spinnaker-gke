@@ -1,534 +1,386 @@
 {
   "name": "Deploy",
   "application": "sample",
+  "id": "2650c7c9-dd0a-4f59-ab0d-9c96a34cd1bc",
   "appConfig": {},
-  "executionEngine": "v2",
   "keepWaitingPipelines": true,
   "lastModifiedBy": "anonymous",
   "limitConcurrent": true,
   "parallel": true,
-  "parameterConfig": [],
+  "expectedArtifacts": [
+    {
+      "defaultArtifact": {
+        "kind": "default.gcs",
+        "name": "gs://PROJECT-kubernetes-manifests/deployments/sample-frontend-production.yaml",
+        "reference": "gs://PROJECT-kubernetes-manifests/deployments/sample-frontend-production.yaml",
+        "type": "gcs/object"
+      },
+      "id": "f07830d8-80ac-4d21-a879-35c1f3592698",
+      "matchArtifact": {
+        "kind": "gcs",
+        "name": "gs://PROJECT-kubernetes-manifests/deployments/sample-frontend-production.yaml",
+        "type": "gcs/object"
+      },
+      "useDefaultArtifact": true,
+      "usePriorArtifact": true,
+      "usePriorExecution": false
+    },
+    {
+      "defaultArtifact": {
+        "kind": "default.gcs",
+        "name": "gs://PROJECT-kubernetes-manifests/deployments/sample-backend-production.yaml",
+        "reference": "gs://PROJECT-kubernetes-manifests/deployments/sample-backend-production.yaml",
+        "type": "gcs/object"
+      },
+      "id": "2d48e090-5610-4691-86e5-88c70123367a",
+      "matchArtifact": {
+        "kind": "gcs",
+        "name": "gs://PROJECT-kubernetes-manifests/deployments/sample-backend-production.yaml",
+        "type": "gcs/object"
+      },
+      "useDefaultArtifact": true,
+      "usePriorArtifact": true,
+      "usePriorExecution": false
+    },
+    {
+      "defaultArtifact": {
+        "kind": "default.gcs",
+        "name": "gs://PROJECT-kubernetes-manifests/services/sample-backend-prod.yaml",
+        "reference": "gs://PROJECT-kubernetes-manifests/services/sample-backend-prod.yaml",
+        "type": "gcs/object"
+      },
+      "id": "eafe5bee-19ca-4c81-95f6-f3d5c8695a25",
+      "matchArtifact": {
+        "kind": "gcs",
+        "name": "gs://PROJECT-kubernetes-manifests/services/sample-backend-prod.yaml",
+        "type": "gcs/object"
+      },
+      "useDefaultArtifact": true,
+      "usePriorArtifact": true,
+      "usePriorExecution": false
+    },
+    {
+      "defaultArtifact": {
+        "kind": "default.gcs",
+        "name": "gs://PROJECT-kubernetes-manifests/services/sample-frontend-prod.yaml",
+        "reference": "gs://PROJECT-kubernetes-manifests/services/sample-frontend-prod.yaml",
+        "type": "gcs/object"
+      },
+      "id": "e169983d-9d3f-42fc-a739-f4f91e9bdc1c",
+      "matchArtifact": {
+        "kind": "gcs",
+        "name": "gs://PROJECT-kubernetes-manifests/services/sample-frontend-prod.yaml",
+        "type": "gcs/object"
+      },
+      "useDefaultArtifact": true,
+      "usePriorArtifact": true,
+      "usePriorExecution": false
+    },
+    {
+      "defaultArtifact": {
+        "kind": "default.docker",
+        "name": "gcr.io/PROJECT/sample-app",
+        "reference": "gcr.io/PROJECT/sample-app:v1.0.0",
+        "type": "docker/image",
+        "version": "v1.0.0"
+      },
+      "id": "80c8982d-f5df-4d31-b828-5d537d8f67aa",
+      "matchArtifact": {
+        "kind": "docker",
+        "name": "gcr.io/PROJECT/sample-app",
+        "type": "docker/image"
+      },
+      "useDefaultArtifact": true,
+      "usePriorArtifact": true,
+      "usePriorExecution": false
+    },
+    {
+      "defaultArtifact": {
+        "id": "1821af7d-d1ed-43c0-b8d1-fca97ed761d0",
+        "kind": "default.gcs",
+        "name": "gs://PROJECT-kubernetes-manifests/services/sample-frontend-canary.yaml",
+        "reference": "gs://PROJECT-kubernetes-manifests/services/sample-frontend-canary.yaml",
+        "type": "gcs/object"
+      },
+      "id": "3252c062-dcf0-48cf-a948-569d101f0622",
+      "matchArtifact": {
+        "id": "7da3f869-69b7-480a-9623-cac2e6c7552c",
+        "kind": "gcs",
+        "name": "gs://PROJECT-kubernetes-manifests/services/sample-frontend-canary.yaml",
+        "type": "gcs/object"
+      },
+      "useDefaultArtifact": true,
+      "usePriorArtifact": true
+    },
+    {
+      "defaultArtifact": {
+        "id": "65f4dacd-0a98-4406-9357-6e016319193e",
+        "kind": "default.gcs",
+        "name": "gs://PROJECT-kubernetes-manifests/services/sample-backend-canary.yaml",
+        "reference": "gs://PROJECT-kubernetes-manifests/services/sample-backend-canary.yaml",
+        "type": "gcs/object"
+      },
+      "id": "db69c110-d95c-4004-b1e0-3e0d926f6e0b",
+      "matchArtifact": {
+        "id": "137eadda-b3f0-43c5-a767-c1cff812507c",
+        "kind": "gcs",
+        "name": "gs://PROJECT-kubernetes-manifests/services/sample-backend-canary.yaml",
+        "type": "gcs/object"
+      },
+      "useDefaultArtifact": true,
+      "usePriorArtifact": true
+    },
+    {
+      "defaultArtifact": {
+        "id": "0ff48afe-8957-4114-a310-3a3c193329a5",
+        "kind": "default.gcs",
+        "name": "gs://PROJECT-kubernetes-manifests/deployments/sample-backend-canary.yaml",
+        "reference": "gs://PROJECT-kubernetes-manifests/deployments/sample-backend-canary.yaml",
+        "type": "gcs/object"
+      },
+      "id": "c9ef0329-2c0a-424c-b74f-3c894ddc4c34",
+      "matchArtifact": {
+        "id": "2da697c4-839a-4e85-ae0d-ab62efef8235",
+        "kind": "gcs",
+        "name": "gs://PROJECT-kubernetes-manifests/deployments/sample-backend-canary.yaml",
+        "type": "gcs/object"
+      },
+      "useDefaultArtifact": true,
+      "usePriorArtifact": true
+    },
+    {
+      "defaultArtifact": {
+        "id": "f34787e7-fd0c-417e-94fd-3b841e0d4448",
+        "kind": "default.gcs",
+        "name": "gs://PROJECT-kubernetes-manifests/deployments/sample-frontend-canary.yaml",
+        "reference": "gs://PROJECT-kubernetes-manifests/deployments/sample-frontend-canary.yaml",
+        "type": "gcs/object"
+      },
+      "id": "a436ab58-954a-4f3d-99f0-c80f54e09a00",
+      "matchArtifact": {
+        "id": "37fb12bf-22c7-482f-b606-a176ddaecd85",
+        "kind": "gcs",
+        "name": "gs://PROJECT-kubernetes-manifests/deployments/sample-frontend-canary.yaml",
+        "type": "gcs/object"
+      },
+      "useDefaultArtifact": true,
+      "usePriorArtifact": true
+    }
+  ],
+  "keepWaitingPipelines": false,
+  "lastModifiedBy": "anonymous",
+  "limitConcurrent": true,
   "stages": [
     {
-      "clusters": [
-        {
-          "account": "local",
-          "application": "sample",
-          "cloudProvider": "kubernetes",
-          "containers": [
-            {
-              "args": [],
-              "command": [],
-              "envVars": [
-                {
-                  "name": "COMPONENT",
-                  "value": "frontend"
-                },
-                {
-                  "name": "VERSION",
-                  "value": "${trigger['tag']}"
-                },
-                {
-                  "name": "BACKEND_URL",
-                  "value": "http://sample-backend-canary:8080/metadata"
-                }
-              ],
-              "imageDescription": {
-                "account": "gcr",
-                "fromTrigger": true,
-                "imageId": "gcr.io/PROJECT/sample-app:v.*",
-                "registry": "gcr.io",
-                "repository": "PROJECT/sample-app",
-                "tag": "v.*"
-              },
-              "imagePullPolicy": "ALWAYS",
-              "limits": {
-                "cpu": null,
-                "memory": null
-              },
-              "livenessProbe": null,
-              "name": "PROJECT-sample-app",
-              "ports": [
-                {
-                  "containerPort": 8080,
-                  "hostIp": null,
-                  "hostPort": null,
-                  "name": "http",
-                  "protocol": "TCP"
-                }
-              ],
-              "readinessProbe": null,
-              "requests": {
-                "cpu": null,
-                "memory": null
-              },
-              "volumeMounts": []
-            }
-          ],
-          "deployment": {
-            "deploymentStrategy": {
-              "rollingUpdate": {
-                "maxSurge": "100%",
-                "maxUnavailable": "0%"
-              },
-              "type": "RollingUpdate"
-            },
-            "enabled": true,
-            "minReadySeconds": 0,
-            "paused": false,
-            "progressRollbackSeconds": null,
-            "revisionHistoryLimit": 2,
-            "rollbackRevision": null
-          },
-          "events": [],
-          "freeFormDetails": "canary",
-          "hostNetwork": null,
-          "interestingHealthProviderNames": [
-            "KubernetesContainer",
-            "KubernetesPod"
-          ],
-          "loadBalancers": [
-            "sample-frontend-canary",
-            "sample-frontend-prod"
-          ],
-          "namespace": "default",
-          "nodeSelector": {},
-          "podAnnotations": {},
-          "provider": "kubernetes",
-          "region": "default",
-          "replicaSetAnnotations": {
-            "deployment.kubernetes.io/desired-replicas": "8",
-            "deployment.kubernetes.io/max-replicas": "16",
-            "deployment.kubernetes.io/revision": "40",
-            "deployment.kubernetes.io/revision-history": "12"
-          },
-          "restartPolicy": null,
-          "securityContext": null,
-          "securityGroups": [],
-          "sequence": null,
-          "stack": "frontend",
-          "strategy": "",
-          "targetSize": 1,
-          "terminationGracePeriodSeconds": 30,
-          "volumeSources": []
-        }
+      "account": "default",
+      "cloudProvider": "kubernetes",
+      "completeOtherBranchesThenFail": false,
+      "continuePipeline": false,
+      "failPipeline": true,
+      "manifestArtifactAccount": "gcs-PROJECT",
+      "manifestArtifactId": "2d48e090-5610-4691-86e5-88c70123367a",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "Deploy Production Backend",
+      "refId": "1",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requiredArtifactIds": [
+        "80c8982d-f5df-4d31-b828-5d537d8f67aa"
       ],
-      "name": "Deploy Frontend Canary",
+      "requisiteStageRefIds": [
+        "6"
+      ],
+      "source": "artifact",
+      "type": "deployManifest"
+    },
+    {
+      "account": "default",
+      "cloudProvider": "kubernetes",
+      "completeOtherBranchesThenFail": false,
+      "continuePipeline": false,
+      "failPipeline": true,
+      "manifestArtifactAccount": "gcs-PROJECT",
+      "manifestArtifactId": "f07830d8-80ac-4d21-a879-35c1f3592698",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "Deploy Production Frontend",
       "refId": "2",
-      "requisiteStageRefIds": [],
-      "type": "deploy"
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requiredArtifactIds": [
+        "80c8982d-f5df-4d31-b828-5d537d8f67aa"
+      ],
+      "requisiteStageRefIds": [
+        "6"
+      ],
+      "source": "artifact",
+      "type": "deployManifest"
     },
     {
-      "clusters": [
-        {
-          "account": "local",
-          "application": "sample",
-          "cloudProvider": "kubernetes",
-          "containers": [
-            {
-              "args": [],
-              "command": [],
-              "envVars": [
-                {
-                  "name": "COMPONENT",
-                  "value": "backend"
-                },
-                {
-                  "name": "VERSION",
-                  "value": "${trigger['tag']}"
-                }
-              ],
-              "imageDescription": {
-                "account": "gcr",
-                "fromTrigger": true,
-                "imageId": "gcr.io/PROJECT/sample-app:v.*",
-                "registry": "gcr.io",
-                "repository": "PROJECT/sample-app",
-                "tag": "v.*"
-              },
-              "imagePullPolicy": "ALWAYS",
-              "limits": {
-                "cpu": null,
-                "memory": null
-              },
-              "livenessProbe": null,
-              "name": "PROJECT-sample-app",
-              "ports": [
-                {
-                  "containerPort": 8080,
-                  "hostIp": null,
-                  "hostPort": null,
-                  "name": "http",
-                  "protocol": "TCP"
-                }
-              ],
-              "readinessProbe": null,
-              "requests": {
-                "cpu": null,
-                "memory": null
-              },
-              "volumeMounts": []
-            }
-          ],
-          "deployment": {
-            "deploymentStrategy": {
-              "rollingUpdate": {
-                "maxSurge": "100%",
-                "maxUnavailable": "0%"
-              },
-              "type": "RollingUpdate"
-            },
-            "enabled": true,
-            "minReadySeconds": 0,
-            "paused": false,
-            "progressRollbackSeconds": null,
-            "revisionHistoryLimit": 2,
-            "rollbackRevision": null
-          },
-          "events": [],
-          "freeFormDetails": "canary",
-          "hostNetwork": null,
-          "interestingHealthProviderNames": [
-            "KubernetesContainer",
-            "KubernetesPod"
-          ],
-          "loadBalancers": [
-            "sample-backend-canary"
-          ],
-          "namespace": "default",
-          "nodeSelector": {},
-          "podAnnotations": {},
-          "provider": "kubernetes",
-          "region": "default",
-          "replicaSetAnnotations": {
-            "deployment.kubernetes.io/desired-replicas": "4",
-            "deployment.kubernetes.io/max-replicas": "8",
-            "deployment.kubernetes.io/revision": "28"
-          },
-          "restartPolicy": null,
-          "securityContext": null,
-          "securityGroups": [],
-          "sequence": null,
-          "stack": "backend",
-          "strategy": "",
-          "targetSize": 1,
-          "terminationGracePeriodSeconds": 30,
-          "volumeSources": []
-        }
-      ],
-      "name": "Deploy Backend Canary",
+      "account": "default",
+      "cloudProvider": "kubernetes",
+      "manifestArtifactAccount": "gcs-PROJECT",
+      "manifestArtifactId": "eafe5bee-19ca-4c81-95f6-f3d5c8695a25",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "Deploy Backend Production Service",
       "refId": "3",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requisiteStageRefIds": [
+        "6"
+      ],
+      "source": "artifact",
+      "type": "deployManifest"
+    },
+    {
+      "account": "default",
+      "cloudProvider": "kubernetes",
+      "manifestArtifactAccount": "gcs-PROJECT",
+      "manifestArtifactId": "e169983d-9d3f-42fc-a739-f4f91e9bdc1c",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "Deploy Frontend Production Service",
+      "refId": "4",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requisiteStageRefIds": [
+        "6"
+      ],
+      "source": "artifact",
+      "type": "deployManifest"
+    },
+    {
+      "account": "default",
+      "cloudProvider": "kubernetes",
+      "completeOtherBranchesThenFail": false,
+      "continuePipeline": false,
+      "failPipeline": true,
+      "manifestArtifactAccount": "gcs-PROJECT",
+      "manifestArtifactId": "c9ef0329-2c0a-424c-b74f-3c894ddc4c34",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "Deploy Canary Backend",
+      "refId": "5",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requiredArtifactIds": [
+        "80c8982d-f5df-4d31-b828-5d537d8f67aa"
+      ],
       "requisiteStageRefIds": [],
-      "type": "deploy"
-    },
-    {
-      "account": "local",
-      "application": "sample",
-      "cloudProvider": "kubernetes",
-      "cloudProviderType": "kubernetes",
-      "container": {
-        "args": [],
-        "command": [
-          "curl",
-          "http://sample-backend-canary:8080"
-        ],
-        "envVars": [],
-        "imageDescription": {
-          "account": "gcr",
-          "fromTrigger": true,
-          "organization": "PROJECT",
-          "registry": "gcr.io",
-          "repository": "PROJECT/sample-app",
-          "tag": "v.*"
-        },
-        "name": "1494826281215",
-        "volumeMounts": []
-      },
-      "credentials": "local",
-      "name": "BE Integration Tests",
-      "namespace": "default",
-      "refId": "7",
-      "requisiteStageRefIds": [
-        "3"
-      ],
-      "type": "runJob",
-      "volumeSources": []
-    },
-    {
-      "account": "local",
-      "annotations": {},
-      "application": "sample",
-      "cloudProvider": "kubernetes",
-      "cloudProviderType": "kubernetes",
-      "container": {
-        "args": [],
-        "command": [
-          "curl",
-          "http://sample-frontend-canary:80"
-        ],
-        "envVars": [],
-        "imageDescription": {
-          "account": "gcr",
-          "fromTrigger": true,
-          "organization": "PROJECT",
-          "registry": "gcr.io",
-          "repository": "PROJECT/sample-app",
-          "tag": "v.*"
-        },
-        "name": "1494826281215",
-        "volumeMounts": []
-      },
-      "credentials": "local",
-      "labels": {},
-      "name": "FE Integration Tests",
-      "namespace": "default",
-      "refId": "8",
-      "requisiteStageRefIds": [
-        "2"
-      ],
-      "type": "runJob",
-      "volumeSources": []
+      "source": "artifact",
+      "type": "deployManifest"
     },
     {
       "failPipeline": true,
-      "instructions": "Do you want to deploy this image to production?",
       "judgmentInputs": [],
-      "name": "Push to Production?",
+      "name": "Deploy to Production?",
       "notifications": [],
-      "refId": "11",
+      "refId": "6",
       "requisiteStageRefIds": [
+        "5",
         "7",
-        "8"
+        "8",
+        "9"
       ],
       "type": "manualJudgment"
     },
     {
-      "clusters": [
-        {
-          "account": "local",
-          "application": "sample",
-          "cloudProvider": "kubernetes",
-          "containers": [
-            {
-              "args": [],
-              "command": [],
-              "envVars": [
-                {
-                  "envSource": null,
-                  "name": "COMPONENT",
-                  "value": "backend"
-                },
-                {
-                  "envSource": null,
-                  "name": "VERSION",
-                  "value": "${ trigger['tag'] }"
-                }
-              ],
-              "imageDescription": {
-                "account": "gcr",
-                "fromTrigger": true,
-                "imageId": "gcr.io/PROJECT/sample-app:v.*",
-                "registry": "gcr.io",
-                "repository": "PROJECT/sample-app",
-                "tag": "v.*"
-              },
-              "imagePullPolicy": "ALWAYS",
-              "lifecycle": null,
-              "limits": null,
-              "livenessProbe": null,
-              "name": "PROJECT-sample-app",
-              "ports": [
-                {
-                  "containerPort": 80,
-                  "hostIp": null,
-                  "hostPort": null,
-                  "name": "http",
-                  "protocol": "TCP"
-                }
-              ],
-              "readinessProbe": null,
-              "requests": null,
-              "securityContext": null,
-              "volumeMounts": []
-            }
-          ],
-          "deployment": {
-            "deploymentStrategy": {
-              "rollingUpdate": {
-                "maxSurge": "100%",
-                "maxUnavailable": "0%"
-              },
-              "type": "RollingUpdate"
-            },
-            "enabled": true,
-            "minReadySeconds": 0,
-            "paused": false,
-            "progressRollbackSeconds": null,
-            "revisionHistoryLimit": 2,
-            "rollbackRevision": null
-          },
-          "events": [],
-          "freeFormDetails": "prod",
-          "hostNetwork": null,
-          "interestingHealthProviderNames": [
-            "KubernetesContainer",
-            "KubernetesPod"
-          ],
-          "loadBalancers": [
-            "sample-backend-prod"
-          ],
-          "namespace": "default",
-          "nodeSelector": {},
-          "podAnnotations": {},
-          "provider": "kubernetes",
-          "region": "default",
-          "replicaSetAnnotations": {
-            "deployment.kubernetes.io/desired-replicas": "4",
-            "deployment.kubernetes.io/max-replicas": "8",
-            "deployment.kubernetes.io/revision": "31"
-          },
-          "restartPolicy": null,
-          "securityContext": null,
-          "securityGroups": [],
-          "sequence": null,
-          "stack": "backend",
-          "strategy": "",
-          "targetSize": 1,
-          "terminationGracePeriodSeconds": 30,
-          "volumeSources": []
-        }
+      "account": "default",
+      "cloudProvider": "kubernetes",
+      "completeOtherBranchesThenFail": false,
+      "continuePipeline": false,
+      "failPipeline": true,
+      "manifestArtifactAccount": "gcs-PROJECT",
+      "manifestArtifactId": "a436ab58-954a-4f3d-99f0-c80f54e09a00",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "Deploy Canary  Frontend",
+      "refId": "7",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requiredArtifactIds": [
+        "80c8982d-f5df-4d31-b828-5d537d8f67aa"
       ],
-      "name": "Deploy Backend Prod",
-      "refId": "12",
-      "requisiteStageRefIds": [
-        "11"
-      ],
-      "type": "deploy"
+      "requisiteStageRefIds": [],
+      "source": "artifact",
+      "type": "deployManifest"
     },
     {
-      "clusters": [
-        {
-          "account": "local",
-          "application": "sample",
-          "cloudProvider": "kubernetes",
-          "containers": [
-            {
-              "args": [],
-              "command": [],
-              "envVars": [
-                {
-                  "envSource": null,
-                  "name": "COMPONENT",
-                  "value": "frontend"
-                },
-                {
-                  "envSource": null,
-                  "name": "VERSION",
-                  "value": "${ trigger['tag'] }"
-                },
-                {
-                  "name": "BACKEND_URL",
-                  "value": "http://sample-backend-prod:8080/metadata"
-                }
-              ],
-              "imageDescription": {
-                "account": "gcr",
-                "fromTrigger": true,
-                "imageId": "gcr.io/PROJECT/sample-app:v.*",
-                "registry": "gcr.io",
-                "repository": "PROJECT/sample-app",
-                "tag": "v.*"
-              },
-              "imagePullPolicy": "ALWAYS",
-              "lifecycle": null,
-              "limits": null,
-              "livenessProbe": null,
-              "name": "PROJECT-sample-app",
-              "ports": [
-                {
-                  "containerPort": 80,
-                  "hostIp": null,
-                  "hostPort": null,
-                  "name": "http",
-                  "protocol": "TCP"
-                }
-              ],
-              "readinessProbe": null,
-              "requests": null,
-              "securityContext": null,
-              "volumeMounts": []
-            }
-          ],
-          "deployment": {
-            "deploymentStrategy": {
-              "rollingUpdate": {
-                "maxSurge": "100%",
-                "maxUnavailable": "0%"
-              },
-              "type": "RollingUpdate"
-            },
-            "enabled": true,
-            "minReadySeconds": 0,
-            "paused": false,
-            "progressRollbackSeconds": null,
-            "revisionHistoryLimit": 2,
-            "rollbackRevision": null
-          },
-          "events": [],
-          "freeFormDetails": "prod",
-          "hostNetwork": null,
-          "interestingHealthProviderNames": [
-            "KubernetesContainer",
-            "KubernetesPod"
-          ],
-          "loadBalancers": [
-            "sample-frontend-prod"
-          ],
-          "namespace": "default",
-          "nodeSelector": {},
-          "podAnnotations": {},
-          "provider": "kubernetes",
-          "region": "default",
-          "replicaSetAnnotations": {
-            "deployment.kubernetes.io/desired-replicas": "8",
-            "deployment.kubernetes.io/max-replicas": "16",
-            "deployment.kubernetes.io/revision": "43",
-            "deployment.kubernetes.io/revision-history": "12"
-          },
-          "restartPolicy": null,
-          "securityContext": null,
-          "securityGroups": [],
-          "sequence": null,
-          "stack": "frontend",
-          "strategy": "",
-          "targetSize": 8,
-          "terminationGracePeriodSeconds": 30,
-          "volumeSources": []
-        }
-      ],
-      "name": "Deploy Frontend Prod",
-      "refId": "13",
-      "requisiteStageRefIds": [
-        "11"
-      ],
-      "type": "deploy"
+      "account": "default",
+      "cloudProvider": "kubernetes",
+      "manifestArtifactAccount": "gcs-PROJECT",
+      "manifestArtifactId": "db69c110-d95c-4004-b1e0-3e0d926f6e0b",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "Deploy Backend Canary Service",
+      "refId": "8",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requisiteStageRefIds": [],
+      "source": "artifact",
+      "type": "deployManifest"
+    },
+    {
+      "account": "default",
+      "cloudProvider": "kubernetes",
+      "manifestArtifactAccount": "gcs-PROJECT",
+      "manifestArtifactId": "3252c062-dcf0-48cf-a948-569d101f0622",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "Deploy Frontend Canary Service",
+      "refId": "9",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requisiteStageRefIds": [],
+      "source": "artifact",
+      "type": "deployManifest"
     }
   ],
   "triggers": [
     {
       "account": "gcr",
-      "application": "gceme",
+      "attributeConstraints": {},
       "enabled": true,
+      "expectedArtifactIds": [
+        "80c8982d-f5df-4d31-b828-5d537d8f67aa"
+      ],
       "organization": "PROJECT",
-      "pipeline": "61372c70-62af-422f-9565-e1975a758612",
+      "payloadConstraints": {
+        "tag": "gcr.io/PROJECT/sample-app:v.*"
+      },
+      "pubsubSystem": "google",
       "registry": "gcr.io",
       "repository": "PROJECT/sample-app",
-      "status": [
-        "successful"
-      ],
+      "subscriptionName": "gcr-triggers",
       "tag": "v.*",
-      "type": "docker"
+      "type": "pubsub"
     }
   ],
-  "updateTs": "1500322920670"
+  "updateTs": "1541650310471"
 }

@@ -15,10 +15,10 @@ run:
   args:
   - -exc
   - |
-    set -o pipefail
     cat > service_account.json <<EOF
     $service_account_json
     EOF
+    set -o pipefail
     apt-get install -y git openssl wget
     gcloud auth activate-service-account --key-file=service_account.json
 
@@ -27,7 +27,6 @@ run:
     echo "Spinnaker Tutorial: Failed to run tutorial" > ../email/subject-failed
     git --no-pager show > ../email/body-failed
 
-    ./tests/scripts/cleanup.sh | tee ../email/body-failed
-    ./tests/scripts/install-spinnaker.sh | tee ../email/body-failed
-
-    
+    timeout 10m ./tests/scripts/cleanup.sh | tee ../email/body-failed
+    timeout 30m ./tests/scripts/install-spinnaker.sh | tee ../email/body-failed
+    timeout 10m ./tests/scripts/cleanup.sh | tee ../email/body-failed

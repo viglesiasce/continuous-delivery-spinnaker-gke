@@ -1,0 +1,34 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: sample-backend-production
+spec:
+  replicas: 4
+  template:
+    metadata:
+      name: backend
+      labels:
+        app: sample
+        role: backend
+        env: production
+    spec:
+      containers:
+      - name: backend
+        image: gcr.io/PROJECT/sample-app
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "100m"
+        imagePullPolicy: Always
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+        env:
+        - name: COMPONENT
+          value: backend
+        - name: VERSION
+          value: production
+        ports:
+        - name: backend
+          containerPort: 8080

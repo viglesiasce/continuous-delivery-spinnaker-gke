@@ -3,4 +3,6 @@ steps:
   args: ['build', '--tag=gcr.io/$PROJECT_ID/sample-app:$TAG_NAME', '.']
 - name: 'gcr.io/cloud-builders/docker'
   args: ['run', 'gcr.io/$PROJECT_ID/sample-app:$TAG_NAME', 'go', 'test']
+- name: 'gcr.io/cloud-builders/gsutil'
+  args: ['cp', '-r', 'k8s/*', 'gs://$PROJECT_ID-kubernetes-manifests']
 images: ['gcr.io/$PROJECT_ID/sample-app:$TAG_NAME']

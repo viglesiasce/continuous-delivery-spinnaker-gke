@@ -11,6 +11,8 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    load-balancer-sample-backend-canary: "true"
+    app: sample
+    role: backend
+    env: canary
   sessionAffinity: None
   type: ClusterIP
