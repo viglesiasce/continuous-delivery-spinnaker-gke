@@ -13,6 +13,5 @@ spec:
   selector:
     app: sample
     role: backend
-    env: production
   sessionAffinity: None
   type: ClusterIP

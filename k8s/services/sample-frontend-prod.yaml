@@ -13,6 +13,5 @@ spec:
   selector:
     app: sample
     role: frontend
-    env: production
   sessionAffinity: None
   type: LoadBalancer
