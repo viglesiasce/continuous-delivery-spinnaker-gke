@@ -1,0 +1,562 @@
+{
+  "name": "Multicluster Deploy",
+  "application": "sample",
+  "appConfig": {},
+  "expectedArtifacts": [
+    {
+      "defaultArtifact": {
+        "kind": "default.gcs",
+        "name": "gs://PROJECT_ID-kubernetes-manifests/deployments/sample-frontend-production.yaml",
+        "reference": "gs://PROJECT_ID-kubernetes-manifests/deployments/sample-frontend-production.yaml",
+        "type": "gcs/object"
+      },
+      "id": "f07830d8-80ac-4d21-a879-35c1f3592698",
+      "matchArtifact": {
+        "kind": "gcs",
+        "name": "gs://PROJECT_ID-kubernetes-manifests/deployments/sample-frontend-production.yaml",
+        "type": "gcs/object"
+      },
+      "useDefaultArtifact": true,
+      "usePriorArtifact": true,
+      "usePriorExecution": false
+    },
+    {
+      "defaultArtifact": {
+        "kind": "default.gcs",
+        "name": "gs://PROJECT_ID-kubernetes-manifests/deployments/sample-backend-production.yaml",
+        "reference": "gs://PROJECT_ID-kubernetes-manifests/deployments/sample-backend-production.yaml",
+        "type": "gcs/object"
+      },
+      "id": "2d48e090-5610-4691-86e5-88c70123367a",
+      "matchArtifact": {
+        "kind": "gcs",
+        "name": "gs://PROJECT_ID-kubernetes-manifests/deployments/sample-backend-production.yaml",
+        "type": "gcs/object"
+      },
+      "useDefaultArtifact": true,
+      "usePriorArtifact": true,
+      "usePriorExecution": false
+    },
+    {
+      "defaultArtifact": {
+        "kind": "default.gcs",
+        "name": "gs://PROJECT_ID-kubernetes-manifests/services/sample-backend-prod.yaml",
+        "reference": "gs://PROJECT_ID-kubernetes-manifests/services/sample-backend-prod.yaml",
+        "type": "gcs/object"
+      },
+      "id": "eafe5bee-19ca-4c81-95f6-f3d5c8695a25",
+      "matchArtifact": {
+        "kind": "gcs",
+        "name": "gs://PROJECT_ID-kubernetes-manifests/services/sample-backend-prod.yaml",
+        "type": "gcs/object"
+      },
+      "useDefaultArtifact": true,
+      "usePriorArtifact": true,
+      "usePriorExecution": false
+    },
+    {
+      "defaultArtifact": {
+        "kind": "default.gcs",
+        "name": "gs://PROJECT_ID-kubernetes-manifests/services/sample-frontend-prod.yaml",
+        "reference": "gs://PROJECT_ID-kubernetes-manifests/services/sample-frontend-prod.yaml",
+        "type": "gcs/object"
+      },
+      "id": "e169983d-9d3f-42fc-a739-f4f91e9bdc1c",
+      "matchArtifact": {
+        "kind": "gcs",
+        "name": "gs://PROJECT_ID-kubernetes-manifests/services/sample-frontend-prod.yaml",
+        "type": "gcs/object"
+      },
+      "useDefaultArtifact": true,
+      "usePriorArtifact": true,
+      "usePriorExecution": false
+    },
+    {
+      "defaultArtifact": {
+        "kind": "default.docker",
+        "name": "gcr.io/PROJECT_ID/sample-app",
+        "reference": "gcr.io/PROJECT_ID/sample-app:v1.0.0",
+        "type": "docker/image",
+        "version": "v1.0.0"
+      },
+      "id": "80c8982d-f5df-4d31-b828-5d537d8f67aa",
+      "matchArtifact": {
+        "kind": "docker",
+        "name": "gcr.io/PROJECT_ID/sample-app",
+        "type": "docker/image"
+      },
+      "useDefaultArtifact": true,
+      "usePriorArtifact": true,
+      "usePriorExecution": false
+    },
+    {
+      "defaultArtifact": {
+        "id": "1821af7d-d1ed-43c0-b8d1-fca97ed761d0",
+        "kind": "default.gcs",
+        "name": "gs://PROJECT_ID-kubernetes-manifests/services/sample-frontend-canary.yaml",
+        "reference": "gs://PROJECT_ID-kubernetes-manifests/services/sample-frontend-canary.yaml",
+        "type": "gcs/object"
+      },
+      "id": "3252c062-dcf0-48cf-a948-569d101f0622",
+      "matchArtifact": {
+        "id": "7da3f869-69b7-480a-9623-cac2e6c7552c",
+        "kind": "gcs",
+        "name": "gs://PROJECT_ID-kubernetes-manifests/services/sample-frontend-canary.yaml",
+        "type": "gcs/object"
+      },
+      "useDefaultArtifact": true,
+      "usePriorArtifact": true
+    },
+    {
+      "defaultArtifact": {
+        "id": "65f4dacd-0a98-4406-9357-6e016319193e",
+        "kind": "default.gcs",
+        "name": "gs://PROJECT_ID-kubernetes-manifests/services/sample-backend-canary.yaml",
+        "reference": "gs://PROJECT_ID-kubernetes-manifests/services/sample-backend-canary.yaml",
+        "type": "gcs/object"
+      },
+      "id": "db69c110-d95c-4004-b1e0-3e0d926f6e0b",
+      "matchArtifact": {
+        "id": "137eadda-b3f0-43c5-a767-c1cff812507c",
+        "kind": "gcs",
+        "name": "gs://PROJECT_ID-kubernetes-manifests/services/sample-backend-canary.yaml",
+        "type": "gcs/object"
+      },
+      "useDefaultArtifact": true,
+      "usePriorArtifact": true
+    },
+    {
+      "defaultArtifact": {
+        "id": "0ff48afe-8957-4114-a310-3a3c193329a5",
+        "kind": "default.gcs",
+        "name": "gs://PROJECT_ID-kubernetes-manifests/deployments/sample-backend-canary.yaml",
+        "reference": "gs://PROJECT_ID-kubernetes-manifests/deployments/sample-backend-canary.yaml",
+        "type": "gcs/object"
+      },
+      "id": "c9ef0329-2c0a-424c-b74f-3c894ddc4c34",
+      "matchArtifact": {
+        "id": "2da697c4-839a-4e85-ae0d-ab62efef8235",
+        "kind": "gcs",
+        "name": "gs://PROJECT_ID-kubernetes-manifests/deployments/sample-backend-canary.yaml",
+        "type": "gcs/object"
+      },
+      "useDefaultArtifact": true,
+      "usePriorArtifact": true
+    },
+    {
+      "defaultArtifact": {
+        "id": "f34787e7-fd0c-417e-94fd-3b841e0d4448",
+        "kind": "default.gcs",
+        "name": "gs://PROJECT_ID-kubernetes-manifests/deployments/sample-frontend-canary.yaml",
+        "reference": "gs://PROJECT_ID-kubernetes-manifests/deployments/sample-frontend-canary.yaml",
+        "type": "gcs/object"
+      },
+      "id": "a436ab58-954a-4f3d-99f0-c80f54e09a00",
+      "matchArtifact": {
+        "id": "37fb12bf-22c7-482f-b606-a176ddaecd85",
+        "kind": "gcs",
+        "name": "gs://PROJECT_ID-kubernetes-manifests/deployments/sample-frontend-canary.yaml",
+        "type": "gcs/object"
+      },
+      "useDefaultArtifact": true,
+      "usePriorArtifact": true
+    }
+  ],
+  "keepWaitingPipelines": false,
+  "lastModifiedBy": "anonymous",
+  "limitConcurrent": true,
+  "parallel": true,
+  "stages": [
+    {
+      "account": "GKE_TWO",
+      "cloudProvider": "kubernetes",
+      "completeOtherBranchesThenFail": false,
+      "continuePipeline": false,
+      "failPipeline": true,
+      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactId": "2d48e090-5610-4691-86e5-88c70123367a",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "REGION_TWO - Deploy Production Backend",
+      "refId": "1",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requiredArtifactIds": [
+        "80c8982d-f5df-4d31-b828-5d537d8f67aa"
+      ],
+      "requisiteStageRefIds": [
+        "6"
+      ],
+      "source": "artifact",
+      "type": "deployManifest"
+    },
+    {
+      "account": "GKE_TWO",
+      "cloudProvider": "kubernetes",
+      "completeOtherBranchesThenFail": false,
+      "continuePipeline": false,
+      "failPipeline": true,
+      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactId": "f07830d8-80ac-4d21-a879-35c1f3592698",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "REGION_TWO - Deploy Production Frontend",
+      "refId": "2",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requiredArtifactIds": [
+        "80c8982d-f5df-4d31-b828-5d537d8f67aa"
+      ],
+      "requisiteStageRefIds": [
+        "6"
+      ],
+      "source": "artifact",
+      "type": "deployManifest"
+    },
+    {
+      "account": "GKE_TWO",
+      "cloudProvider": "kubernetes",
+      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactId": "eafe5bee-19ca-4c81-95f6-f3d5c8695a25",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "REGION_TWO - Deploy Backend Production Service",
+      "refId": "3",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requisiteStageRefIds": [
+        "6"
+      ],
+      "source": "artifact",
+      "type": "deployManifest"
+    },
+    {
+      "account": "GKE_TWO",
+      "cloudProvider": "kubernetes",
+      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactId": "e169983d-9d3f-42fc-a739-f4f91e9bdc1c",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "REGION_TWO - Deploy Frontend Production Service",
+      "refId": "4",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requisiteStageRefIds": [
+        "6"
+      ],
+      "source": "artifact",
+      "type": "deployManifest"
+    },
+    {
+      "account": "GKE_TWO",
+      "cloudProvider": "kubernetes",
+      "completeOtherBranchesThenFail": false,
+      "continuePipeline": false,
+      "failPipeline": true,
+      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactId": "c9ef0329-2c0a-424c-b74f-3c894ddc4c34",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "REGION_TWO - Deploy Canary Backend",
+      "refId": "5",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requiredArtifactIds": [
+        "80c8982d-f5df-4d31-b828-5d537d8f67aa"
+      ],
+      "requisiteStageRefIds": [],
+      "source": "artifact",
+      "type": "deployManifest"
+    },
+    {
+      "failPipeline": true,
+      "judgmentInputs": [],
+      "name": "REGION_TWO / REGION_ONE Clusters - Deploy to Production?",
+      "notifications": [],
+      "refId": "6",
+      "requisiteStageRefIds": [
+        "5",
+        "7",
+        "8",
+        "9",
+        "10",
+        "12",
+        "11",
+        "13"
+      ],
+      "type": "manualJudgment"
+    },
+    {
+      "account": "GKE_TWO",
+      "cloudProvider": "kubernetes",
+      "completeOtherBranchesThenFail": false,
+      "continuePipeline": false,
+      "failPipeline": true,
+      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactId": "a436ab58-954a-4f3d-99f0-c80f54e09a00",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "REGION_TWO - Deploy Canary  Frontend",
+      "refId": "7",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requiredArtifactIds": [
+        "80c8982d-f5df-4d31-b828-5d537d8f67aa"
+      ],
+      "requisiteStageRefIds": [],
+      "source": "artifact",
+      "type": "deployManifest"
+    },
+    {
+      "account": "GKE_TWO",
+      "cloudProvider": "kubernetes",
+      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactId": "db69c110-d95c-4004-b1e0-3e0d926f6e0b",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "REGION_TWO - Deploy Backend Canary Service",
+      "refId": "8",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requisiteStageRefIds": [],
+      "source": "artifact",
+      "type": "deployManifest"
+    },
+    {
+      "account": "GKE_TWO",
+      "cloudProvider": "kubernetes",
+      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactId": "3252c062-dcf0-48cf-a948-569d101f0622",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "REGION_TWO - Deploy Frontend Canary Service",
+      "refId": "9",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requisiteStageRefIds": [],
+      "source": "artifact",
+      "type": "deployManifest"
+    },
+    {
+      "account": "GKE_ONE",
+      "cloudProvider": "kubernetes",
+      "completeOtherBranchesThenFail": false,
+      "continuePipeline": false,
+      "failPipeline": true,
+      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactId": "c9ef0329-2c0a-424c-b74f-3c894ddc4c34",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "REGION_ONE - Deploy Canary Backend",
+      "refId": "10",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requiredArtifactIds": [
+        "80c8982d-f5df-4d31-b828-5d537d8f67aa"
+      ],
+      "requisiteStageRefIds": [],
+      "source": "artifact",
+      "type": "deployManifest"
+    },
+    {
+      "account": "GKE_ONE",
+      "cloudProvider": "kubernetes",
+      "completeOtherBranchesThenFail": false,
+      "continuePipeline": false,
+      "failPipeline": true,
+      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactId": "a436ab58-954a-4f3d-99f0-c80f54e09a00",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "REGION_ONE - Deploy Canary  Frontend",
+      "refId": "11",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requiredArtifactIds": [
+        "80c8982d-f5df-4d31-b828-5d537d8f67aa"
+      ],
+      "requisiteStageRefIds": [],
+      "source": "artifact",
+      "type": "deployManifest"
+    },
+    {
+      "account": "GKE_ONE",
+      "cloudProvider": "kubernetes",
+      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactId": "db69c110-d95c-4004-b1e0-3e0d926f6e0b",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "REGION_ONE - Deploy Backend Canary Service",
+      "refId": "12",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requisiteStageRefIds": [],
+      "source": "artifact",
+      "type": "deployManifest"
+    },
+    {
+      "account": "GKE_ONE",
+      "cloudProvider": "kubernetes",
+      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactId": "3252c062-dcf0-48cf-a948-569d101f0622",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "REGION_ONE - Deploy Frontend Canary Service",
+      "refId": "13",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requisiteStageRefIds": [],
+      "source": "artifact",
+      "type": "deployManifest"
+    },
+    {
+      "account": "GKE_ONE",
+      "cloudProvider": "kubernetes",
+      "completeOtherBranchesThenFail": false,
+      "continuePipeline": false,
+      "failPipeline": true,
+      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactId": "2d48e090-5610-4691-86e5-88c70123367a",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "REGION_ONE - Deploy Production Backend",
+      "refId": "14",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requiredArtifactIds": [
+        "80c8982d-f5df-4d31-b828-5d537d8f67aa"
+      ],
+      "requisiteStageRefIds": [
+        "6"
+      ],
+      "source": "artifact",
+      "type": "deployManifest"
+    },
+    {
+      "account": "GKE_ONE",
+      "cloudProvider": "kubernetes",
+      "completeOtherBranchesThenFail": false,
+      "continuePipeline": false,
+      "failPipeline": true,
+      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactId": "f07830d8-80ac-4d21-a879-35c1f3592698",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "REGION_ONE  - Deploy Production Frontend",
+      "refId": "15",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requiredArtifactIds": [
+        "80c8982d-f5df-4d31-b828-5d537d8f67aa"
+      ],
+      "requisiteStageRefIds": [
+        "6"
+      ],
+      "source": "artifact",
+      "type": "deployManifest"
+    },
+    {
+      "account": "GKE_ONE",
+      "cloudProvider": "kubernetes",
+      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactId": "eafe5bee-19ca-4c81-95f6-f3d5c8695a25",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "REGION_ONE - Deploy Backend Production Service",
+      "refId": "16",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requisiteStageRefIds": [
+        "6"
+      ],
+      "source": "artifact",
+      "type": "deployManifest"
+    },
+    {
+      "account": "GKE_ONE",
+      "cloudProvider": "kubernetes",
+      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactId": "e169983d-9d3f-42fc-a739-f4f91e9bdc1c",
+      "moniker": {
+        "app": "sample"
+      },
+      "name": "REGION_ONE - Deploy Frontend Production Service",
+      "refId": "17",
+      "relationships": {
+        "loadBalancers": [],
+        "securityGroups": []
+      },
+      "requisiteStageRefIds": [
+        "6"
+      ],
+      "source": "artifact",
+      "type": "deployManifest"
+    }
+  ],
+  "triggers": [
+    {
+      "account": "gcr",
+      "attributeConstraints": {},
+      "enabled": true,
+      "expectedArtifactIds": [
+        "80c8982d-f5df-4d31-b828-5d537d8f67aa"
+      ],
+      "organization": "PROJECT_ID",
+      "payloadConstraints": {
+        "tag": "gcr.io/PROJECT_ID/sample-app:v.*"
+      },
+      "pubsubSystem": "google",
+      "registry": "gcr.io",
+      "repository": "PROJECT_ID/sample-app",
+      "subscriptionName": "gcr-triggers",
+      "tag": "v.*",
+      "type": "pubsub"
+    }
+  ],
+  "updateTs": "1553545957018"
+}
