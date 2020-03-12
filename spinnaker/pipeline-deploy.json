@@ -365,7 +365,6 @@
   "triggers": [
     {
       "account": "gcr",
-      "attributeConstraints": {},
       "enabled": true,
       "expectedArtifactIds": [
         "80c8982d-f5df-4d31-b828-5d537d8f67aa"
