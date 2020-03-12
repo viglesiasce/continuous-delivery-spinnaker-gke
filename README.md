@@ -1,3 +1,4 @@
 # Continuous Delivery with Spinnaker and Kubernetes
 
-This tutorial has been deprecated in favor of: [Continuous Delivery Pipelines with Spinnaker and Google Kubernetes Engine](https://cloud.google.com/solutions/continuous-delivery-spinnaker-kubernetes-engine).
+For instructions on running this tutorial, please visit:
+[Continuous Delivery Pipelines with Spinnaker and Google Kubernetes Engine](https://cloud.google.com/solutions/continuous-delivery-spinnaker-kubernetes-engine).
