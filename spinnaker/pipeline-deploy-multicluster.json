@@ -173,7 +173,7 @@
       "completeOtherBranchesThenFail": false,
       "continuePipeline": false,
       "failPipeline": true,
-      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactAccount": "gcs-install-account",
       "manifestArtifactId": "2d48e090-5610-4691-86e5-88c70123367a",
       "moniker": {
         "app": "sample"
@@ -199,7 +199,7 @@
       "completeOtherBranchesThenFail": false,
       "continuePipeline": false,
       "failPipeline": true,
-      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactAccount": "gcs-install-account",
       "manifestArtifactId": "f07830d8-80ac-4d21-a879-35c1f3592698",
       "moniker": {
         "app": "sample"
@@ -222,7 +222,7 @@
     {
       "account": "GKE_TWO",
       "cloudProvider": "kubernetes",
-      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactAccount": "gcs-install-account",
       "manifestArtifactId": "eafe5bee-19ca-4c81-95f6-f3d5c8695a25",
       "moniker": {
         "app": "sample"
@@ -242,7 +242,7 @@
     {
       "account": "GKE_TWO",
       "cloudProvider": "kubernetes",
-      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactAccount": "gcs-install-account",
       "manifestArtifactId": "e169983d-9d3f-42fc-a739-f4f91e9bdc1c",
       "moniker": {
         "app": "sample"
@@ -265,7 +265,7 @@
       "completeOtherBranchesThenFail": false,
       "continuePipeline": false,
       "failPipeline": true,
-      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactAccount": "gcs-install-account",
       "manifestArtifactId": "c9ef0329-2c0a-424c-b74f-3c894ddc4c34",
       "moniker": {
         "app": "sample"
@@ -307,7 +307,7 @@
       "completeOtherBranchesThenFail": false,
       "continuePipeline": false,
       "failPipeline": true,
-      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactAccount": "gcs-install-account",
       "manifestArtifactId": "a436ab58-954a-4f3d-99f0-c80f54e09a00",
       "moniker": {
         "app": "sample"
@@ -328,7 +328,7 @@
     {
       "account": "GKE_TWO",
       "cloudProvider": "kubernetes",
-      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactAccount": "gcs-install-account",
       "manifestArtifactId": "db69c110-d95c-4004-b1e0-3e0d926f6e0b",
       "moniker": {
         "app": "sample"
@@ -346,7 +346,7 @@
     {
       "account": "GKE_TWO",
       "cloudProvider": "kubernetes",
-      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactAccount": "gcs-install-account",
       "manifestArtifactId": "3252c062-dcf0-48cf-a948-569d101f0622",
       "moniker": {
         "app": "sample"
@@ -367,7 +367,7 @@
       "completeOtherBranchesThenFail": false,
       "continuePipeline": false,
       "failPipeline": true,
-      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactAccount": "gcs-install-account",
       "manifestArtifactId": "c9ef0329-2c0a-424c-b74f-3c894ddc4c34",
       "moniker": {
         "app": "sample"
@@ -391,7 +391,7 @@
       "completeOtherBranchesThenFail": false,
       "continuePipeline": false,
       "failPipeline": true,
-      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactAccount": "gcs-install-account",
       "manifestArtifactId": "a436ab58-954a-4f3d-99f0-c80f54e09a00",
       "moniker": {
         "app": "sample"
@@ -412,7 +412,7 @@
     {
       "account": "GKE_ONE",
       "cloudProvider": "kubernetes",
-      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactAccount": "gcs-install-account",
       "manifestArtifactId": "db69c110-d95c-4004-b1e0-3e0d926f6e0b",
       "moniker": {
         "app": "sample"
@@ -430,7 +430,7 @@
     {
       "account": "GKE_ONE",
       "cloudProvider": "kubernetes",
-      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactAccount": "gcs-install-account",
       "manifestArtifactId": "3252c062-dcf0-48cf-a948-569d101f0622",
       "moniker": {
         "app": "sample"
@@ -451,7 +451,7 @@
       "completeOtherBranchesThenFail": false,
       "continuePipeline": false,
       "failPipeline": true,
-      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactAccount": "gcs-install-account",
       "manifestArtifactId": "2d48e090-5610-4691-86e5-88c70123367a",
       "moniker": {
         "app": "sample"
@@ -477,7 +477,7 @@
       "completeOtherBranchesThenFail": false,
       "continuePipeline": false,
       "failPipeline": true,
-      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactAccount": "gcs-install-account",
       "manifestArtifactId": "f07830d8-80ac-4d21-a879-35c1f3592698",
       "moniker": {
         "app": "sample"
@@ -500,7 +500,7 @@
     {
       "account": "GKE_ONE",
       "cloudProvider": "kubernetes",
-      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactAccount": "gcs-install-account",
       "manifestArtifactId": "eafe5bee-19ca-4c81-95f6-f3d5c8695a25",
       "moniker": {
         "app": "sample"
@@ -520,7 +520,7 @@
     {
       "account": "GKE_ONE",
       "cloudProvider": "kubernetes",
-      "manifestArtifactAccount": "gcs-PROJECT_ID",
+      "manifestArtifactAccount": "gcs-install-account",
       "manifestArtifactId": "e169983d-9d3f-42fc-a739-f4f91e9bdc1c",
       "moniker": {
         "app": "sample"
@@ -553,7 +553,7 @@
       "pubsubSystem": "google",
       "registry": "gcr.io",
       "repository": "PROJECT_ID/sample-app",
-      "subscriptionName": "gcr-triggers",
+      "subscriptionName": "gcr-pub-sub",
       "tag": "v.*",
       "type": "pubsub"
     }
